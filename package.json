@@ -1,0 +1,28 @@
+{
+  "name": "news-reader-next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "9.2.2",
+    "react": "16.13.0",
+    "react-dom": "16.13.0",
+    "@n8tb1t/use-scroll-position": "^1.0.43",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "@wp-headless/client": "^0.9.4",
+    "normalize.css": "^8.0.1",
+    "react-burger-menu": "^2.6.13",
+    "react-hamburger-menu": "^1.1.1",
+    "react-html-parser": "^2.0.2",
+    "react-loading-skeleton": "^2.0.1",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.3.1",
+    "unfetch": "^4.1.0"
+  }
+}

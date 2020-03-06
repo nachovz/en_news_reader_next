@@ -1,0 +1,144 @@
+/*Reset*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: local('Merriweather'), url(/fonts/Merriweather-Regular.ttf) format('truetype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Charter';
+  src: local('Charter'), url(/fonts/Charter-Regular.ttf) format('truetype');
+  font-display: swap;
+}
+h1, h2 {
+  font-family: 'Merriweather';
+  color: inherit;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+h1{
+  font-size: 2em;
+  letter-spacing: .05em;
+  line-height: 1.1em;
+}
+h2{
+  font-size: 1.5em;
+  line-height: 1.3em;
+  letter-spacing: .03em;
+}
+a {
+   text-decoration: none;
+   color: inherit;
+}
+p {
+  font-family: 'Charter';
+  font-size: 1.1em;
+  line-height: 1.2em;
+  margin-bottom: 16px;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-font-smoothing: antialiased !important;
+  text-rendering: optimizelegibility !important;
+  letter-spacing: .03em;
+}
+em {
+  font-style: italic;
+}
+main p {
+  color: #060606; 
+  margin-left: 20px; 
+  margin-right: 20px; 
+  width: calc(100% - 40px); 
+  max-width: 600px; 
+  font-size: 1.125rem;
+}
+main h2 {
+  margin: 10px 20px;
+}
+main ul{
+  padding:10px;
+  background: #f1f1f1;
+  margin-bottom: 20px;
+}
+main ul li {
+  margin: 10px 20px;
+  text-decoration: underline;
+  color: #011689;
+}
+main ul:before {
+    content: " Sigue leyendo: ";
+    display: block;
+    margin: 10px 20px;
+}
+main iframe{
+  margin-bottom: 20px;
+}
+#nav_menu > span {
+  font-family: 'Merriweather';
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  font-size: 0.8em;
+  height: 52px;
+  line-height: 55px;
+  padding: 0 10px;
+}
+#nav_menu > span.active{
+  color: white;
+  background: #011689
+}

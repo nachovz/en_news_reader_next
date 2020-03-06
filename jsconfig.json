@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "baseUrl": "./",
+    "paths": {
+      "static/*": ["static/*"],
+      "helpers/*": ["src/helpers/*"],
+      "pages/*": ["src/pages/*"],
+      "reducers/*": ["src/redux-flow/reducers/*"],
+      "requests/*": ["src/requests/*"],
+      "routes/*": ["routes.js"],
+      "component/*": ["src/component/*"],
+      "styles/*":["src/styles/*"],
+      "data/*":["src/data/*"],
+      "utils/*":["src/utils/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}

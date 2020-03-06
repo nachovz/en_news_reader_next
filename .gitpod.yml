@@ -1,0 +1,6 @@
+ports:
+- port: 3000
+- port: 9009
+tasks:
+  - init: npm install -g npm
+    command: npm install

@@ -2,6 +2,7 @@ import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 import getBestImage from 'utils/getBestImage';
 import tagCleaner from 'utils/tagCleaner';
+import { NextSeo } from 'next-seo';
 import { DEVICE_WIDTH, TEXT_SPACING, COLORS } from 'styles/constants';
 
 const styles = {
@@ -37,6 +38,28 @@ export default ({ title, content, _embedded }) => {
     
   return (
     <article style={styles.article}>
+      <NextSeo
+        openGraph={{
+          type: 'website',
+          url: 'https://www.example.com/page',
+          title: 'Open Graph Title',
+          description: 'Open Graph Description',
+          images: [
+            {
+              url: 'https://www.example.ie/og-image.jpg',
+              width: 800,
+              height: 600,
+              alt: 'Og Image Alt',
+            },
+            {
+              url: 'https://www.example.ie/og-image-2.jpg',
+              width: 800,
+              height: 600,
+              alt: 'Og Image Alt 2',
+            },
+          ],
+        }}
+      />
       <header style={styles.paddedContent}>
         <h1>{!!title ?
             tagCleaner(title.rendered) 

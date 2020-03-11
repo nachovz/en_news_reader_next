@@ -5,7 +5,8 @@ export const TEXT_SPACING = 20;
 export const DEVICE_WIDTH = typeof window !== 'undefined' ? document.documentElement.clientWidth: 300;
 export const COLORS = {
   text: '#060606',
-  text_light:'#333333',
+  text_light:'#505050',
+  text_dark: '#a0a0a0',
   text_contrast: '#ffffff', 
   primary: '#011689',
   border: '#dcdcdc',

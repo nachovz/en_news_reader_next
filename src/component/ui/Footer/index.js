@@ -6,7 +6,7 @@ const styles={
         maxWidth: '100vw',
         background: COLORS.background_darkest,
         textAlign: 'center',
-        color: COLORS.text_light,
+        color: COLORS.text_dark,
         padding: SPACING,
         fontSize: '0.8em',
         lineHeight: '1.5em'

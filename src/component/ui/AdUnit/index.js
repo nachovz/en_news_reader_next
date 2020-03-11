@@ -26,7 +26,7 @@ const styles={
   unit_default_text:{
     lineHeight: '35px',
     fontStyle: 'italic',
-    color: COLORS.border
+    color: COLORS.text_light
   }
 }
 

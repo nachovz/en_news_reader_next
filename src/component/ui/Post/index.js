@@ -35,10 +35,11 @@ const styles = {
 };
 
 export default ({ title, content, _embedded }) => {
-    
+
   return (
     <article style={styles.article}>
       <NextSeo
+        title={!!title && title.rendered}
         openGraph={{
           type: 'website',
           url: 'https://www.example.com/page',
@@ -72,7 +73,7 @@ export default ({ title, content, _embedded }) => {
       {!!_embedded ? 
         <figure style={styles.figure}> 
             <img 
-            src={getBestImage(_embedded["wp:featuredmedia"]["0"].media_details.sizes)} 
+            src={typeof window != 'undefined' && getBestImage(_embedded["wp:featuredmedia"]["0"].media_details.sizes)} 
             width={DEVICE_WIDTH} 
             alt={_embedded["wp:featuredmedia"]["0"].title.rendered} />
             <figcaption style={styles.figcaption}>

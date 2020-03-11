@@ -140,7 +140,7 @@ export default function() {
         &nbsp;
       </div>
       <div style={styles.article_wrapper}>
-        {state.posts.map((post, ind) => {
+        {typeof window !== 'undefined' && state.posts.map((post, ind) => {
           return(
             <React.Fragment key={ind}>
               <PostCard noImage={ind % 3} margin={(ind+1) % 3 === 0} {...post} />

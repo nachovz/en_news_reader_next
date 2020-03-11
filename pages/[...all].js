@@ -6,10 +6,10 @@ import { slugFinder } from 'utils/urlUtil';
 import Post from 'component/ui/Post';
 import KeepReading from 'component/ui/KeepReading';
 
-export default function PostView() {
+const PostView = props => {
   const router = useRouter();
   const { all } = router.query;
-  const [ posts, setPosts] = useState([]);
+  const [ posts, setPosts] = useState([props]);
   const [ loadingMore, setLoadingMore ] = useState(true);
 
   const fetchPost = async () => {
@@ -19,12 +19,12 @@ export default function PostView() {
   }
 
   useEffect(() => {
-    if(posts.length === 0 && !!all){
+    /*if(posts.length === 0 && !!all){
       fetchPost().then((post) => {
         setPosts( [ post ] );
         setLoadingMore(false);
       });
-    }
+    }*/
   });
 
   /*useScrollPosition(({ currPos }) => {
@@ -46,3 +46,12 @@ export default function PostView() {
     </React.Fragment>
   );
 }
+
+PostView.getInitialProps = async function(context) {
+  const { all } = context.query;
+  client.param('_embed', true);
+  const post = await client.posts().slug(slugFinder(all.join('/')));
+  return post;
+};
+
+export default PostView;

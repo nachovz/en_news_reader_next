@@ -1,3 +1,4 @@
+import 'isomorphic-unfetch';
 import Client from '@wp-headless/client';
 //import FetchTransport from '@wp-headless/transport-fetch';
 import dummy from 'data/posts.json';

@@ -11,7 +11,8 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <link rel="preconnect" href="https://www.elnacional.com"/>
-          <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net"/>  
+          <link rel="preconnect" href="https://googleads.g.doubleclick.net"/>  
+          <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net"/> 
         </Head>
         <body>
           <Main />

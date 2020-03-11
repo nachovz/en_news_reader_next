@@ -5,7 +5,6 @@ import { BORDER_STYLE, COLORS, TEXT_SPACING } from 'styles/constants';
 const styles={
   unit_container: {
     width: '100%',
-    height: '100%',
     textAlign: 'center',
     margin: `${TEXT_SPACING}px 0 ${TEXT_SPACING}px 0`,
     padding: `${TEXT_SPACING*2}px 0`,

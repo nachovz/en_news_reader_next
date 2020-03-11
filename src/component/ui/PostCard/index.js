@@ -1,5 +1,4 @@
 import React from 'react';
-import Skeleton from 'react-loading-skeleton';
 import tagCleaner from 'utils/tagCleaner';
 import { urlCleaner } from 'utils/urlUtil';
 import getBestImage from 'utils/getBestImage';
@@ -43,7 +42,7 @@ export default function({
 }){
   return(
     <article style={styles.post_container}>
-      {!!_embedded ? !noImage && !!_embedded["wp:featuredmedia"]["0"].media_details && !!link &&
+      {!!_embedded && !noImage && !!_embedded["wp:featuredmedia"]["0"].media_details && !!link &&
         <div style={styles.imagesContainer}>
           <a href={urlCleaner(link)}>
             <img 
@@ -52,11 +51,9 @@ export default function({
               alt={_embedded["wp:featuredmedia"]["0"].title.rendered} />
           </a>
         </div>
-        :
-        <Skeleton height={200} />
       }
       <div style={{...styles.title_container, ...margin ? styles.margin_bottom : {}}}>
-        {!!link && !!title && !!excerpt && !!date_gmt ? 
+        {!!link && !!title && !!excerpt && !!date_gmt && 
           <React.Fragment>
             <a href={urlCleaner(link)}>
               <h2 style={noImage ? styles.title_smaller : {}}>
@@ -67,18 +64,6 @@ export default function({
             <div style={styles.date_container}>
               <span>{dateAgoToText(new Date(date_gmt+'Z'))}</span>
             </div>
-          </React.Fragment>
-        :
-          <React.Fragment>
-            <h2>
-              <Skeleton count={2}/>
-            </h2>
-            <p>
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-            </p>
           </React.Fragment>
         }
       </div>

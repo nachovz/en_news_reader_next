@@ -16,19 +16,25 @@ import dummyPost from 'data/post.json';
     window.location.hostname.indexOf('gitpod.io')
 );*/
 
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
 class OfflineClient {
   posts = () => {
     return this;
   }
   
-  get = () =>{
-    return dummy;
+  get = async () =>{
+    await sleep(2000);
+    return  dummy;
   }
 
   param = () => {
   }
 
-  slug = () =>{
+  slug = async () =>{
+    await sleep(2000);
     return dummyPost;
   }
 }

@@ -49,4 +49,43 @@ export const MAP_ID = {
     type: 'categories',
     value: 308
   }
-}
+};
+
+export const menuElements = [
+  {
+    value: 'ultima-hora',
+    tag: 'DESTACADO'
+  },
+  {
+    value: 'venezuela',
+    tag: 'VENEZUELA'
+  },
+  {
+    value: 'mundo',
+    tag: 'MUNDO'
+  },
+  { 
+    value: 'economia',
+    tag: 'ECONOMÍA'
+  },
+  {        
+    value: 'deportes',
+    tag: 'DEPORTES'
+  },
+  {
+    value: 'ciencia-tecnologia',
+    tag: 'CIENCIA Y TECNOLOGÍA'        
+  },
+  {
+    value: 'entretenimiento',
+    tag: 'ENTRETENIMIENTO'
+  },        
+  {
+    value: 'opinion',
+    tag: 'OPINIÓN'
+  },        
+  {
+    value: 'life-style',
+    tag: 'ESTILO DE VIDA'
+  }
+];

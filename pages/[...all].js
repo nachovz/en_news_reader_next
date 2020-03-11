@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import client from 'utils/client';
 import { useRouter } from 'next/router'
-//import { useScrollPosition } from '@n8tb1t/use-scroll-position';
+import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import { slugFinder } from 'utils/urlUtil';
 import Post from 'component/ui/Post';
 import KeepReading from 'component/ui/KeepReading';
@@ -10,7 +10,7 @@ const PostView = props => {
   const router = useRouter();
   const { all } = router.query;
   const [ posts, setPosts] = useState([props]);
-  const [ loadingMore, setLoadingMore ] = useState(true);
+  const [ loadingMore, setLoadingMore ] = useState(false);
 
   const fetchPost = async () => {
     client.param('_embed', true);
@@ -27,7 +27,7 @@ const PostView = props => {
     }*/
   });
 
-  /*useScrollPosition(({ currPos }) => {
+  typeof window !== 'undefined' && useScrollPosition(({ currPos }) => {
     console.log((currPos.y*-1) > document.documentElement.scrollHeight - (window.innerHeight*1.5))
     if((currPos.y*-1) > document.documentElement.scrollHeight - (window.innerHeight*1.5)){
       setLoadingMore(true);
@@ -36,7 +36,7 @@ const PostView = props => {
         setLoadingMore(false);
       });
     }
-  }, [posts], null, false, 3000)*/
+  }, [posts], null, false, 3000);
 
   return (
     <React.Fragment>

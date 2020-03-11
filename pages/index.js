@@ -3,8 +3,9 @@ import client from 'utils/client';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import PostCard from 'component/ui/PostCard';
 import AdUnit from 'component/ui/AdUnit';
+import Skeleton from 'component/ui/Skeleton';
 import { BORDER_STYLE, COLORS } from 'styles/constants';
-import { AD_BOX, AD_BANNER, MAP_ID } from 'data/constants';
+import { AD_BOX, AD_BANNER, MAP_ID, menuElements } from 'data/constants';
 
 const styles = {
   nav_menu: {
@@ -29,45 +30,6 @@ const styles = {
   }
 };
 
-const menuElements = [
-  {
-    value: 'ultima-hora',
-    tag: 'DESTACADO'
-  },
-  {
-    value: 'venezuela',
-    tag: 'VENEZUELA'
-  },
-  {
-    value: 'mundo',
-    tag: 'MUNDO'
-  },
-  { 
-    value: 'economia',
-    tag: 'ECONOMÍA'
-  },
-  {        
-    value: 'deportes',
-    tag: 'DEPORTES'
-  },
-  {
-    value: 'ciencia-tecnologia',
-    tag: 'CIENCIA Y TECNOLOGÍA'        
-  },
-  {
-    value: 'entretenimiento',
-    tag: 'ENTRETENIMIENTO'
-  },        
-  {
-    value: 'opinion',
-    tag: 'OPINIÓN'
-  },        
-  {
-    value: 'life-style',
-    tag: 'ESTILO DE VIDA'
-  }
-];
-
 const fetchPosts = async (page=0, filter=[]) => {
   const posts = await client.posts().get({
     per_page: 10,
@@ -86,11 +48,11 @@ const parseFilter = (filter) => {
   }, {})  
 }
 
-export default function() {
+const Home = ({ posts }) => {
   const [ state, setState ] = useState({ 
     filter: ['ultima-hora'], 
     page: 0, 
-    posts: [] 
+    posts: [...posts] 
   });
   const [ viewState, setViewState ] = useState('ultima-hora')
   const [ loadingMore, setLoadingMore] = useState(true); 
@@ -151,11 +113,22 @@ export default function() {
           )
         })}
         {loadingMore && 
-        <div style={styles.default_container}>
-          <PostCard />
-          <PostCard />
+        <div>
+          <Skeleton />
         </div>}
       </div>
     </div>
   );
 };
+
+Home.getInitialProps = async function() {
+  const posts = await client.posts().get({
+    per_page: 10,
+    ...parseFilter(['ultima-hora']),
+    _fields: 'title,excerpt,link,date_gmt,featured_media,_links,slug',
+    _embed: 1,
+  });
+  return { posts };
+};
+
+export default Home;

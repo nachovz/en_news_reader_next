@@ -1,15 +1,16 @@
 import React from 'react';
-import Skeleton from 'react-loading-skeleton';
+import Skeleton from 'component/ui/Skeleton';
 import getBestImage from 'utils/getBestImage';
 import tagCleaner from 'utils/tagCleaner';
+import { unicodeToChar } from 'utils/textUtil';
 import { NextSeo } from 'next-seo';
 import { DEVICE_WIDTH, TEXT_SPACING, COLORS } from 'styles/constants';
 
 const styles = {
-    article:{
-        minHeight:'100vh',
-        borderBottom:`${TEXT_SPACING}px solid ${COLORS.primary}`  
-    },
+  article:{
+      minHeight:'100vh',
+      borderBottom:`${TEXT_SPACING}px solid ${COLORS.primary}`  
+  },
   paddedContent:{
     color: COLORS.text,
     marginLeft: '20px',
@@ -34,12 +35,14 @@ const styles = {
   }
 };
 
-export default ({ title, content, _embedded }) => {
 
+export default ({ title, content, _embedded, excerpt, ...props }) => {
+  console.log(props);
   return (
     <article style={styles.article}>
       <NextSeo
-        title={!!title && title.rendered}
+        title={!!title && unicodeToChar(title.rendered)}
+        description={!!excerpt && unicodeToChar(excerpt.rendered)}
         openGraph={{
           type: 'website',
           url: 'https://www.example.com/page',
@@ -70,10 +73,10 @@ export default ({ title, content, _embedded }) => {
             </span>
         }</h1>
       </header>
-      {!!_embedded ? 
+      {!!_embedded && typeof window != 'undefined' ? 
         <figure style={styles.figure}> 
             <img 
-            src={typeof window != 'undefined' && getBestImage(_embedded["wp:featuredmedia"]["0"].media_details.sizes)} 
+            src={ getBestImage(_embedded["wp:featuredmedia"]["0"].media_details.sizes)} 
             width={DEVICE_WIDTH} 
             alt={_embedded["wp:featuredmedia"]["0"].title.rendered} />
             <figcaption style={styles.figcaption}>
@@ -87,17 +90,7 @@ export default ({ title, content, _embedded }) => {
         {!!content ? 
             tagCleaner(content.rendered, 'content') 
             : 
-            <React.Fragment>
-                <p style={styles.skeleton_content}>
-                  <SkeletonBlock />
-                </p>
-                <p style={styles.skeleton_content}>
-                  <SkeletonBlock />
-                </p>
-                <p style={styles.skeleton_content}>
-                  <SkeletonBlock />
-                </p>
-            </React.Fragment>
+            <Skeleton/>
         }
       </main>
     </article>

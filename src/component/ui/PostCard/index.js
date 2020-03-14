@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { SkeletonImage } from 'component/ui/Skeleton';
 import tagCleaner from 'utils/tagCleaner';
 import { urlCleaner } from 'utils/urlUtil';
 import getBestImage from 'utils/images/getBestImage';
@@ -49,16 +50,20 @@ export default function({
       {!!_embedded && !noImage && !!_embedded["wp:featuredmedia"] && !!_embedded["wp:featuredmedia"]["0"] && !!_embedded["wp:featuredmedia"]["0"].media_details && !!link &&
         <figure>
           <a href={urlCleaner(link)}>
-            {!!client &&
-              <img
-                src={PLACEHOLDER_IMAGE}
-                data-src={getBestImage(_embedded["wp:featuredmedia"]["0"].media_details.sizes)} 
-                alt={_embedded["wp:featuredmedia"]["0"].title.rendered} 
-              />
+            {!!client ?
+              <>
+                <img
+                  src={PLACEHOLDER_IMAGE}
+                  data-src={getBestImage(_embedded["wp:featuredmedia"]["0"].media_details.sizes)} 
+                  alt={_embedded["wp:featuredmedia"]["0"].title.rendered} 
+                />
+                <figcaption>
+                  {tagCleaner(_embedded["wp:featuredmedia"]["0"].title.rendered)}
+                </figcaption>
+              </>
+              :
+              <SkeletonImage/>
             }
-            <figcaption>
-              {tagCleaner(_embedded["wp:featuredmedia"]["0"].title.rendered)}
-            </figcaption>
           </a>
         </figure>
       }

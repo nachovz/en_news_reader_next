@@ -50,10 +50,9 @@ const PostView = props => {
   );
 }
 
-PostView.getInitialProps = async function(context) {
-  const { all } = context.query;
+PostView.getInitialProps = async function({ query: { cat, slug } }) {
   client.param('_embed', true);
-  const post = await client.posts().slug(slugFinder(all.join('/')));
+  const post = await client.posts().slug(slug);
   return post;
 };
 

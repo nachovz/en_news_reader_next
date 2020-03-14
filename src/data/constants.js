@@ -54,38 +54,86 @@ export const MAP_ID = {
 export const menuElements = [
   {
     value: 'ultima-hora',
-    tag: 'DESTACADO'
+    tag: 'DESTACADO',
+    slug: '/'
   },
   {
     value: 'venezuela',
-    tag: 'VENEZUELA'
+    tag: 'VENEZUELA',
+    slug: '/venezuela/'
   },
   {
     value: 'mundo',
-    tag: 'MUNDO'
+    tag: 'MUNDO',
+    slug: '/mundo/'
   },
   { 
     value: 'economia',
-    tag: 'ECONOMÍA'
+    tag: 'ECONOMÍA',
+    slug: '/economia/'
   },
   {        
     value: 'deportes',
-    tag: 'DEPORTES'
+    tag: 'DEPORTES',
+    slug: '/deportes/'
   },
   {
     value: 'ciencia-tecnologia',
-    tag: 'CIENCIA Y TECNOLOGÍA'        
+    tag: 'CIENCIA Y TECNOLOGÍA',
+    slug: '/ciencia-tecnologia/'        
   },
   {
     value: 'entretenimiento',
-    tag: 'ENTRETENIMIENTO'
+    tag: 'ENTRETENIMIENTO',
+    slug: '/entretenimiento/'
   },        
   {
     value: 'opinion',
-    tag: 'OPINIÓN'
+    tag: 'OPINIÓN',
+    slug: '/opinion/'
   },        
   {
     value: 'life-style',
-    tag: 'ESTILO DE VIDA'
+    tag: 'ESTILO DE VIDA',
+    slug: '/life-style/'
   }
 ];
+
+export const routes = {
+  '/': {
+    value: 'ultima-hora',
+    tag: 'DESTACADO'
+  },
+  '/venezuela/': {
+    value: 'venezuela',
+    tag: 'VENEZUELA' 
+  },
+  '/mundo/': {
+    value: 'mundo',
+    tag: 'MUNDO' 
+  },
+  '/economia/':{  
+    value: 'economia',
+    tag: 'ECONOMÍA' 
+  },
+  '/deportes/':{         
+    value: 'deportes',
+    tag: 'DEPORTES' 
+  },
+  '/ciencia-tecnologia/': {
+    value: 'ciencia-tecnologia',
+    tag: 'CIENCIA Y TECNOLOGÍA'        
+  },
+  '/entretenimiento/': {
+    value: 'entretenimiento',
+    tag: 'ENTRETENIMIENTO' 
+  },        
+  '/opinion/': {
+    value: 'opinion',
+    tag: 'OPINIÓN' 
+  },        
+  '/life-style/': {
+    value: 'life-style',
+    tag: 'ESTILO DE VIDA'
+  }
+}

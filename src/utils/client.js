@@ -3,6 +3,7 @@ import Client from '@wp-headless/client';
 //import FetchTransport from '@wp-headless/transport-fetch';
 import dummy from 'data/posts.json';
 import dummy2 from 'data/posts2.json';
+import dummy3 from 'data/posts3.json';
 import dummyPost from 'data/post.json';
 
 /*const isLocalhost = Boolean(
@@ -28,7 +29,7 @@ class OfflineClient {
   
   get = async () =>{
     await sleep(2000);
-    return Math.floor(Math.random()*2) === 1 ? dummy: dummy2;
+    return [dummy, dummy2, dummy3][Math.floor(Math.random()*3)];
   }
 
   param = () => {

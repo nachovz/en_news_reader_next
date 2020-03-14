@@ -13,7 +13,6 @@ class MyDocument extends Document {
           <link rel="preconnect" href="https://www.elnacional.com"/>
           <link rel="preconnect" href="https://googleads.g.doubleclick.net"/>  
           <link rel="dns-prefetch" href="https://static.doubleclick.net"/> 
-          <link rel="preload" href="/fonts/Charter-Regular.ttf" as="font"/>
         </Head>
         <body>
           <Main />

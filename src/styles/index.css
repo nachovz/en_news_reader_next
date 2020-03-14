@@ -55,17 +55,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-@font-face {
-  font-family: 'Merriweather';
-  src: local('Merriweather'), url(/fonts/Merriweather-Regular.ttf) format('truetype');
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Charter';
-  src: local('Charter'), url(/fonts/Charter-Regular.ttf) format('truetype');
-  font-display: swap;
-}
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tinos&display=swap');
 h1, h2 {
   font-family: 'Merriweather';
   color: inherit;
@@ -87,8 +78,8 @@ a {
    color: inherit;
 }
 p {
-  font-family: 'Charter';
-  font-size: 1.1em;
+  font-family: 'Tinos';
+  font-size: 1.2em;
   line-height: 1.2em;
   margin-bottom: 16px;
   -moz-osx-font-smoothing: grayscale;
@@ -103,6 +94,7 @@ em {
 figure{
   background: rgb(255, 255, 255);
   overflow: hidden;
+  min-height: 250px;
 }
 figure img{
   max-width:100%;

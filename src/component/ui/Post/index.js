@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Skeleton from 'component/ui/Skeleton';
+import { Skeleton } from 'component/ui/Skeleton';
 import getBestImage from 'utils/images/getBestImage';
 import tagCleaner from 'utils/tagCleaner';
 import { unicodeToChar } from 'utils/textUtil';

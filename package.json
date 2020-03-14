@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
     "start": "next start"
   },
@@ -15,6 +15,7 @@
     "@wp-headless/client": "^0.9.4",
     "isomorphic-unfetch": "^3.0.0",
     "next": "9.2.2",
+    "next-routes": "^1.4.2",
     "next-seo": "^4.4.0",
     "normalize.css": "^8.0.1",
     "react": "16.13.0",
@@ -22,7 +23,6 @@
     "react-dom": "16.13.0",
     "react-hamburger-menu": "^1.1.1",
     "react-html-parser": "^2.0.2",
-    "react-loading-skeleton": "^2.0.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.1",
     "unfetch": "^4.1.0"

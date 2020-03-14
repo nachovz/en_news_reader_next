@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import client from 'utils/client';
+import { NextSeo } from 'next-seo';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import PostCard from 'component/ui/PostCard';
 import AdUnit from 'component/ui/AdUnit';
-import Skeleton from 'component/ui/Skeleton';
+import { Skeleton } from 'component/ui/Skeleton';
 import lazyLoadImages from 'utils/images/lazyLoadImages';
+import parseFilter from 'utils/parseFilter';
 import { BORDER_STYLE, COLORS } from 'styles/constants';
-import { AD_BOX, AD_BANNER, MAP_ID, menuElements } from 'data/constants';
+import { AD_BOX, AD_BANNER, menuElements, routes } from 'data/constants';
 
 const styles = {
   nav_menu: {
@@ -42,21 +44,15 @@ const fetchPosts = async (page=0, filter=[]) => {
   return posts;
 };
 
-const parseFilter = (filter) => {
-  return filter.reduce( (final, name) => {
-    final[MAP_ID[name].type] = (final[MAP_ID[name].type] || '') + `${!!final[MAP_ID[name].type] ? ',' : ''}${MAP_ID[name].value}`;
-    return  final
-  }, {})  
-}
-
-const Home = ({ posts }) => {
+const Home = ({ posts, cat }) => {
+  const route = routes[cat] ? routes[cat].value:routes['/'].value;
   const [ state, setState ] = useState({ 
-    filter: ['ultima-hora'], 
+    filter: [route], 
     page: 0, 
     posts: [...posts] 
   });
-  const [ viewState, setViewState ] = useState('ultima-hora')
-  const [ loadingMore, setLoadingMore] = useState(true); 
+  const [ viewState, setViewState ] = useState(route)
+  const [ loadingMore, setLoadingMore] = useState(true);
 
   useEffect(() => {
     //setLoadingMore(typeof window !== 'undefined')
@@ -78,6 +74,7 @@ const Home = ({ posts }) => {
 
   const changeCategory = (elem) =>{
     setViewState(elem.value);
+    window.history.replaceState({}, '', elem.slug);
     setLoadingMore(true);
     setState({filter: [elem.value], page: 0, posts: []});
     typeof window !== 'undefined' && window.scrollTo(0, 0);
@@ -90,6 +87,30 @@ const Home = ({ posts }) => {
   }
   return (
     <div>
+      <NextSeo
+        title={"El Nacional"}
+        description={"Diario El Nacional de Venezuela"}
+        openGraph={{
+          type: 'website',
+          url: 'https://www.example.com/page',
+          title: 'Open Graph Title',
+          description: 'Open Graph Description',
+          images: [
+            {
+              url: 'https://www.example.ie/og-image.jpg',
+              width: 800,
+              height: 600,
+              alt: 'Og Image Alt',
+            },
+            {
+              url: 'https://www.example.ie/og-image-2.jpg',
+              width: 800,
+              height: 600,
+              alt: 'Og Image Alt 2',
+            },
+          ],
+        }}
+      />
       <div id="nav_menu" style={styles.nav_menu}>
         {menuElements.map( (elem, ind) => (
           <span 
@@ -120,16 +141,6 @@ const Home = ({ posts }) => {
       </div>
     </div>
   );
-};
-
-Home.getInitialProps = async function() {
-  const posts = await client.posts().get({
-    per_page: 10,
-    ...parseFilter(['ultima-hora']),
-    _fields: 'title,excerpt,link,date_gmt,featured_media,_links,slug',
-    _embed: 1,
-  });
-  return { posts };
 };
 
 export default Home;

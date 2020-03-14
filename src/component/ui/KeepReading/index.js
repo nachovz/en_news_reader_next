@@ -1,9 +1,9 @@
 import React from 'react';
-import { DEVICE_WIDTH, TEXT_SPACING, COLORS } from 'styles/constants';
+import { TEXT_SPACING, COLORS } from 'styles/constants';
 
 const styles={
     keep_reading:{
-        width: DEVICE_WIDTH,
+        width: '100%',
         textAlign: 'center',
         fontFamily: 'Merriweather',
         background: COLORS.primary,

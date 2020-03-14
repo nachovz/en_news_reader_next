@@ -5,6 +5,7 @@ import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import { slugFinder } from 'utils/urlUtil';
 import Post from 'component/ui/Post';
 import KeepReading from 'component/ui/KeepReading';
+import lazyLoadImages from 'utils/images/lazyLoadImages';
 
 const PostView = props => {
   const router = useRouter();
@@ -25,7 +26,8 @@ const PostView = props => {
         setLoadingMore(false);
       });
     }*/
-  });
+    lazyLoadImages();
+  }, [loadingMore]);
 
   typeof window !== 'undefined' && useScrollPosition(({ currPos }) => {
     console.log((currPos.y*-1) > document.documentElement.scrollHeight - (window.innerHeight*1.5))
@@ -34,6 +36,7 @@ const PostView = props => {
       fetchPost().then((post) => {
         setPosts( [...posts, post ] );
         setLoadingMore(false);
+        lazyLoadImages();
       });
     }
   }, [posts], null, false, 3000);

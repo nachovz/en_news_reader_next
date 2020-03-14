@@ -14,7 +14,7 @@ const styles = {
 };
 
 export default ({ full=false }) => (
-  <div>
+  <div style={{minHeight: '100vh'}}>
     {!!full && 
       <React.Fragment>
         <div className="skeleton_element" style={styles.skeleton_big_line}></div>
@@ -22,6 +22,12 @@ export default ({ full=false }) => (
         <div className="skeleton_element" style={styles.skeleton_big_line}></div>
       </React.Fragment>
     }
+    <div className="skeleton_element" style={styles.skeleton_image}></div>
+    <div className="skeleton_element" style={styles.skeleton_small_line}></div>
+    <div className="skeleton_element" style={styles.skeleton_small_line}></div>
+    <div className="skeleton_element" style={styles.skeleton_small_line}></div>
+    <div className="skeleton_element" style={styles.skeleton_small_line}></div>
+    <div className="skeleton_element" style={styles.skeleton_small_line}></div>
     <div className="skeleton_element" style={styles.skeleton_image}></div>
     <div className="skeleton_element" style={styles.skeleton_small_line}></div>
     <div className="skeleton_element" style={styles.skeleton_small_line}></div>

@@ -2,6 +2,7 @@ import 'isomorphic-unfetch';
 import Client from '@wp-headless/client';
 //import FetchTransport from '@wp-headless/transport-fetch';
 import dummy from 'data/posts.json';
+import dummy2 from 'data/posts2.json';
 import dummyPost from 'data/post.json';
 
 /*const isLocalhost = Boolean(
@@ -27,7 +28,7 @@ class OfflineClient {
   
   get = async () =>{
     await sleep(2000);
-    return  dummy;
+    return Math.floor(Math.random()*2) === 1 ? dummy: dummy2;
   }
 
   param = () => {
@@ -45,3 +46,4 @@ export default new Client({
   transport: new FetchTransport(),
   endpoint: 'https://www.elnacional.com/wp-json/wp/v2'
 });*/
+//https://www.elnacional.com/wp-json/wp/v2/posts?per_page=10&_embed&_fields=title,excerpt,link,date_gmt,featured_media,_links,slug

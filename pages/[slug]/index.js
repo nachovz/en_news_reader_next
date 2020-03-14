@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import client from 'utils/client';
-import Router from 'next/router'
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import PostCard from 'component/ui/PostCard';
 import AdUnit from 'component/ui/AdUnit';
@@ -57,7 +56,7 @@ const Home = ({ posts }) => {
     posts: [...posts] 
   });
   const [ viewState, setViewState ] = useState('ultima-hora')
-  const [ loadingMore, setLoadingMore] = useState(true);
+  const [ loadingMore, setLoadingMore] = useState(true); 
 
   useEffect(() => {
     //setLoadingMore(typeof window !== 'undefined')
@@ -87,7 +86,6 @@ const Home = ({ posts }) => {
         s => ({ filter: [elem.value], page: 0, posts: [...posts] })
       );
       setLoadingMore(false);
-      //Router.push(`/${elem.value}/`, null, { shallow: true })
     });
   }
   return (

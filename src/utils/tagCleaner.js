@@ -10,8 +10,8 @@ export default (ren, type='title') => {
       .replace(/&#187;/g,'</em>”')
       .replace(/<p><iframe/g,'<iframe')
       .replace(/\/iframe><\/p>/g,'/iframe>')
-      .replace(/width="[0-9]*"/g, `width="${DEVICE_WIDTH}"`)
-      .replace(/height="[0-9]*"/g, ``)
+      .replace(/width="[0-9]*"/g, `width="100%"`)
+      .replace(/height="[0-9]*"/g, `height="250px"`)
   );
   
   if(type==='title') return parsed;

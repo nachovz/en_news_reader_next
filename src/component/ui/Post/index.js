@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Skeleton from 'component/ui/Skeleton';
-import getBestImage from 'utils/getBestImage';
+import getBestImage from 'utils/images/getBestImage';
 import tagCleaner from 'utils/tagCleaner';
 import { unicodeToChar } from 'utils/textUtil';
 import { NextSeo } from 'next-seo';
-import { DEVICE_WIDTH, TEXT_SPACING, COLORS } from 'styles/constants';
+import { DEVICE_WIDTH, TEXT_SPACING, COLORS, PLACEHOLDER_IMAGE } from 'styles/constants';
 
 const styles = {
   article:{
@@ -25,9 +25,7 @@ const styles = {
     marginBottom: TEXT_SPACING
   },
   figcaption: {
-    padding: `8px ${TEXT_SPACING}px 0 ${TEXT_SPACING}px`,
-    fontStyle: 'italic',
-    color: COLORS.text_light
+    padding: `8px ${TEXT_SPACING}px 0 ${TEXT_SPACING}px`
   },
   skeleton_content:{
       marginTop: TEXT_SPACING,
@@ -35,9 +33,9 @@ const styles = {
   }
 };
 
-
 export default ({ title, content, _embedded, excerpt, ...props }) => {
-  console.log(props);
+  const [ client, setClient ] = useState(typeof window !== 'undefined');
+
   return (
     <article style={styles.article}>
       <NextSeo
@@ -69,16 +67,18 @@ export default ({ title, content, _embedded, excerpt, ...props }) => {
             tagCleaner(title.rendered) 
             : 
             <span style={styles.skeleton_content}>
-              <SkeletonBlock />
+              <Skeleton/>
             </span>
         }</h1>
       </header>
-      {!!_embedded && typeof window != 'undefined' ? 
+      {!!_embedded ? 
         <figure style={styles.figure}> 
-            <img 
-            src={ getBestImage(_embedded["wp:featuredmedia"]["0"].media_details.sizes)} 
-            width={DEVICE_WIDTH} 
-            alt={_embedded["wp:featuredmedia"]["0"].title.rendered} />
+            {!!client &&
+              <img 
+                src={PLACEHOLDER_IMAGE}
+                data-src={getBestImage(_embedded["wp:featuredmedia"]["0"].media_details.sizes)} 
+                alt={_embedded["wp:featuredmedia"]["0"].title.rendered} />
+            }
             <figcaption style={styles.figcaption}>
               {tagCleaner(_embedded["wp:featuredmedia"]["0"].title.rendered)}
             </figcaption>
@@ -96,14 +96,3 @@ export default ({ title, content, _embedded, excerpt, ...props }) => {
     </article>
   );
 }
-
-const SkeletonBlock = () =>{
-  return(
-    <React.Fragment>
-      <Skeleton style={{ width: "calc(100vw-40)"}} />
-      <Skeleton style={{ width: "calc(100vw-60)"}} />
-      <Skeleton style={{ width: "calc(100vw-70)"}} />
-      <Skeleton style={{ width: "calc(100vw-40)"}} />
-    </React.Fragment>
-  )
-  }

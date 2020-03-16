@@ -1,31 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import client from 'utils/client';
-import { useRouter } from 'next/router'
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
-import { slugFinder } from 'utils/urlUtil';
 import Post from 'component/ui/Post';
 import KeepReading from 'component/ui/KeepReading';
 import lazyLoadImages from 'utils/images/lazyLoadImages';
 
-const PostView = props => {
-  const router = useRouter();
-  const { all } = router.query;
-  const [ posts, setPosts] = useState([props]);
+const PostView = ({ post }) => {
+  const [ posts, setPosts] = useState([ post ]);
   const [ loadingMore, setLoadingMore ] = useState(false);
 
   const fetchPost = async () => {
-    client.param('_embed', true);
-    const post = await client.posts().slug(slugFinder(all.join('/')));
-    return post;
+    console.log(posts);
+    const newPost = await client.posts().get({
+      per_page: 10,
+      offset: posts.length,
+      categories: posts[0].categories[0],//next post of same category. TO TEST & Validate
+      _fields: 'title,excerpt,link,date_gmt,featured_media,_links,slug',
+      _embed: 1,
+    });
+    return newPost;
   }
 
   useEffect(() => {
-    /*if(posts.length === 0 && !!all){
-      fetchPost().then((post) => {
-        setPosts( [ post ] );
-        setLoadingMore(false);
-      });
-    }*/
     lazyLoadImages();
   }, [loadingMore]);
 
@@ -53,7 +49,7 @@ const PostView = props => {
 PostView.getInitialProps = async function({ query: { cat, slug } }) {
   client.param('_embed', true);
   const post = await client.posts().slug(slug);
-  return post;
+  return { post };
 };
 
 export default PostView;

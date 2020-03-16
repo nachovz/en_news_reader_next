@@ -5,6 +5,12 @@ import Post from 'component/ui/Post';
 import KeepReading from 'component/ui/KeepReading';
 import lazyLoadImages from 'utils/images/lazyLoadImages';
 
+const globalParamsPost = {
+  per_page: 1,
+  _fields: 'title,excerpt,link,date_gmt,featured_media,_links,slug,categories,yoast_title,yoast_meta,yoast_json_ld',
+  _embed: 1,
+};
+
 const PostView = ({ post }) => {
   const [ posts, setPosts] = useState([ post ]);
   const [ loadingMore, setLoadingMore ] = useState(false);
@@ -46,8 +52,8 @@ const PostView = ({ post }) => {
   );
 }
 
-PostView.getInitialProps = async function({ query: { cat, slug } }) {
-  client.param('_embed', true);
+PostView.getInitialProps = async function({ query: {  slug } }) {
+  client.param(globalParamsPost);
   const post = await client.posts().slug(slug);
   return { post };
 };

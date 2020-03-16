@@ -23,19 +23,22 @@ const sleep = (milliseconds) => {
 }
 
 class OfflineClient {
+  params = {};
+  param = (params) =>{
+    this.params = params;
+  }
   posts = () => {
     return this;
   }
   
   get = async () =>{
+    console.log('Querying with params: ',this.params);
     await sleep(2000);
     return [dummy, dummy2, dummy3][Math.floor(Math.random()*3)];
   }
 
-  param = () => {
-  }
-
-  slug = async () =>{
+  slug = async (slug) =>{
+    console.log('Querying with params: ',{...this.params, slug});
     await sleep(2000);
     return dummyPost;
   }
@@ -49,7 +52,9 @@ export default new Client({
 });*/
 //Last 10 posts
 //https://www.elnacional.com/wp-json/wp/v2/posts?per_page=10&_embed&_fields=title,excerpt,link,date_gmt,featured_media,_links,slug
-//Single Post by slug
-//https://www.elnacional.com/wp-json/wp/v2/posts?per_page=1&slug=critican-a-la-mama-de-robert-serra-por-ofrecer-tapabocas-artesanales-con-huecos&_embed&_fields=title,excerpt,link,date_gmt,featured_media,_links,slug
+
+//Single Post by slug (With yoast meta)
+//https://www.elnacional.com/wp-json/wp/v2/posts?per_page=1&slug=critican-a-la-mama-de-robert-serra-por-ofrecer-tapabocas-artesanales-con-huecos&_embed&_fields=title,excerpt,content,link,date_gmt,featured_media,_links,slug,categories,yoast_title,yoast_meta,yoast_json_ld
+
 //By categories offset 1
 //https://www.elnacional.com/wp-json/wp/v2/posts?per_page=1&_embed&categories=23799&offset=1&_fields=title,excerpt,link,date_gmt,featured_media,_links,slug

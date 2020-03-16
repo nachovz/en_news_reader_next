@@ -24,9 +24,6 @@ const styles = {
     marginTop: TEXT_SPACING,
     marginBottom: TEXT_SPACING
   },
-  figcaption: {
-    padding: `8px ${TEXT_SPACING}px 0 ${TEXT_SPACING}px`
-  },
   skeleton_content:{
       marginTop: TEXT_SPACING,
       lineHeight:'1.5em' 
@@ -35,7 +32,7 @@ const styles = {
 
 export default ({ title, content, _embedded, excerpt, ...props }) => {
   const [ client, setClient ] = useState(typeof window !== 'undefined');
-
+  console.log(props)
   return (
     <article style={styles.article}>
       <NextSeo
@@ -79,7 +76,7 @@ export default ({ title, content, _embedded, excerpt, ...props }) => {
                 data-src={getBestImage(_embedded["wp:featuredmedia"]["0"].media_details.sizes)} 
                 alt={_embedded["wp:featuredmedia"]["0"].title.rendered} />
             }
-            <figcaption style={styles.figcaption}>
+            <figcaption>
               {tagCleaner(_embedded["wp:featuredmedia"]["0"].title.rendered)}
             </figcaption>
         </figure>

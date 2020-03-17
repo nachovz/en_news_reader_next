@@ -18,11 +18,10 @@ const PostView = ({ post }) => {
   const fetchPost = async () => {
     console.log(posts);
     const newPost = await client.posts().get({
+      ...globalParamsPost,
       per_page: 10,
       offset: posts.length,
       categories: posts[0].categories[0],//next post of same category. TO TEST & Validate
-      _fields: 'title,excerpt,link,date_gmt,featured_media,_links,slug',
-      _embed: 1,
     });
     return newPost;
   }
@@ -41,7 +40,7 @@ const PostView = ({ post }) => {
         lazyLoadImages();
       });
     }
-  }, [posts], null, false, 3000);
+  }, [posts], null, false, 1000);
 
   return (
     <React.Fragment>

@@ -4,7 +4,7 @@ import getBestImage from 'utils/images/getBestImage';
 import tagCleaner from 'utils/tagCleaner';
 import { unicodeToChar } from 'utils/textUtil';
 import { NextSeo } from 'next-seo';
-import { DEVICE_WIDTH, TEXT_SPACING, COLORS, PLACEHOLDER_IMAGE } from 'styles/constants';
+import { TEXT_SPACING, COLORS, PLACEHOLDER_IMAGE } from 'styles/constants';
 
 const styles = {
   article:{
@@ -30,16 +30,24 @@ const styles = {
   }
 };
 
-export default ({ title, content, _embedded, excerpt, ...props }) => {
+const yoastProcess = (yoast_meta) =>{
+  return yoast_meta.reduce( ( final, meta) => {
+    final[(meta.name || meta.property || 'key')] = (meta.content || 'value');
+    return final;
+  }, {} );
+}
+
+export default ({ title, content, _embedded, excerpt, yoast_title, yoast_meta, yoast_json_ld, ...props }) => {
   const [ client, setClient ] = useState(typeof window !== 'undefined');
-  console.log(props)
+  //console.log( yoastProcess(yoast_meta));
+  yoast_meta = yoastProcess(yoast_meta);
   return (
     <article style={styles.article}>
       <NextSeo
-        title={!!title && unicodeToChar(title.rendered)}
-        description={!!excerpt && unicodeToChar(excerpt.rendered)}
+        title={yoast_title || ''}
+        description={yoast_meta.description || ''}
         openGraph={{
-          type: 'website',
+          type: yoast_meta['og:type'],
           url: 'https://www.example.com/page',
           title: 'Open Graph Title',
           description: 'Open Graph Description',

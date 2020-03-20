@@ -16,21 +16,30 @@ export default (ren, type='title') => {
       .replace(/src/g,`data-src`)
       .replace(/srcset/g,`data-srcset`)
       .replace(/http:\/\/www.elnacional.com/g, `https://www.elnacional.com`)
+      .replace(/<blockquote/g,`<div class="wrapped-content"><blockquote`)
+      .replace(/<\/blockquote>/g,`</blockquote></div>`)
+
   );
   
   if(type==='title') return parsed;
 
   let withAds = [];
-  
+  let paragraphs = 1;
   parsed.forEach( (node, ind) => {
-    const inset = (ind+1) % 3 === 0;
+    const inset = paragraphs % 4 === 0;
     const top = !!node.type.match(/h2|iframe|h3|h4|h5|h6/);
-    if(top && inset){
-      withAds.push(<AdUnit key={`ad_${ind}`} />)
-    }
-    withAds.push(node);
-    if(!top && inset) {
-      withAds.push(<AdUnit key={`ad_${ind}`} />)
+    const isP = node.type === 'p';
+    if(isP){
+      if(top && inset){
+        withAds.push(<AdUnit key={`ad_${ind}`} />)
+      }
+      withAds.push(node);
+      if(!top && inset) {
+        withAds.push(<AdUnit key={`ad_${ind}`} />)
+      }
+      paragraphs++;
+    }else{
+      withAds.push(node);
     }
   })
 

@@ -100,39 +100,39 @@ export const menuElements = [
 ];
 
 export const routes = {
-  '/': {
+  '': {
     value: 'ultima-hora',
     tag: 'DESTACADO'
   },
-  '/venezuela/': {
+  'venezuela': {
     value: 'venezuela',
     tag: 'VENEZUELA' 
   },
-  '/mundo/': {
+  'mundo': {
     value: 'mundo',
     tag: 'MUNDO' 
   },
-  '/economia/':{  
+  'economia':{  
     value: 'economia',
     tag: 'ECONOMÍA' 
   },
-  '/deportes/':{         
+  'deportes':{         
     value: 'deportes',
     tag: 'DEPORTES' 
   },
-  '/ciencia-tecnologia/': {
+  'ciencia-tecnologia': {
     value: 'ciencia-tecnologia',
     tag: 'CIENCIA Y TECNOLOGÍA'        
   },
-  '/entretenimiento/': {
+  'entretenimiento': {
     value: 'entretenimiento',
     tag: 'ENTRETENIMIENTO' 
   },        
-  '/opinion/': {
+  'opinion': {
     value: 'opinion',
     tag: 'OPINIÓN' 
   },        
-  '/life-style/': {
+  'life-style': {
     value: 'life-style',
     tag: 'ESTILO DE VIDA'
   }

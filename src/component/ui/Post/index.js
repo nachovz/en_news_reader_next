@@ -7,6 +7,7 @@ import { unicodeToChar } from 'utils/textUtil';
 import { NextSeo } from 'next-seo';
 import { TEXT_SPACING, COLORS, PLACEHOLDER_IMAGE } from 'styles/constants';
 import { routes } from 'data/constants';
+import useScript from 'hook/useScript';
 
 const styles = {
   article:{
@@ -40,6 +41,8 @@ const yoastProcess = (yoast_meta) =>{
 
 export default ({ cat, title, content, _embedded, excerpt, date_gmt, modified_gmt, link, yoast_title, yoast_meta, yoast_json_ld, ...props }) => {
   const [ client, setClient ] = useState(typeof window !== 'undefined');
+  useScript('https://platform.twitter.com/widgets.js');
+  useScript('https://www.instagram.com/embed.js');
   yoast_meta = yoastProcess(yoast_meta);
   const date = new Date(date_gmt+'Z');
   const ye = new Intl.DateTimeFormat('es', { year: 'numeric' }).format(date);
@@ -88,7 +91,6 @@ export default ({ cat, title, content, _embedded, excerpt, date_gmt, modified_gm
         <script type="application/ld+json" dangerouslySetInnerHTML={{
             __html: JSON.stringify(yoast_json_ld)}}>
         </script>
-        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
       </Head>
       <header style={styles.paddedContent}>
         <h1>{!!title && tagCleaner(title.rendered) }</h1>
@@ -114,7 +116,7 @@ export default ({ cat, title, content, _embedded, excerpt, date_gmt, modified_gm
             </figcaption>
         </figure>
       }
-      <main>
+      <main >
         {!!content && tagCleaner(content.rendered, 'content') }
       </main>
     </article>

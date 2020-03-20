@@ -107,7 +107,7 @@ figure figcaption{
   font-style:italic;
   color:#505050;
 }
-main p {
+main p, .wrapped-content {
   color: #060606; 
   margin-left: 20px; 
   margin-right: 20px; 

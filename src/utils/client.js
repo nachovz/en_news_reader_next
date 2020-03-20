@@ -5,8 +5,11 @@ import dummy from 'data/posts.json';
 import dummy2 from 'data/posts2.json';
 import dummy3 from 'data/posts3.json';
 import dummyPost from 'data/post.json';
+import dummyPost2 from 'data/post2.json';
 
-/*const isLocalhost = Boolean(
+
+const isLocalhost = Boolean( 
+  typeof window === 'undefined' || 
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.
     window.location.hostname === '[::1]' ||
@@ -16,7 +19,7 @@ import dummyPost from 'data/post.json';
     ) ||
     //gitpod
     window.location.hostname.indexOf('gitpod.io')
-);*/
+);
 
 const sleep = (milliseconds) => {
   return new Promise(resolve => setTimeout(resolve, milliseconds))
@@ -32,19 +35,19 @@ class OfflineClient {
   }
   
   get = async () =>{
-    console.log('Querying with params: ',this.params);
+    //console.log('Querying with params: ',this.params);
     await sleep(2000);
     return [dummy, dummy2, dummy3][Math.floor(Math.random()*3)];
   }
 
   slug = async (slug) =>{
-    console.log('Querying with params: ',{...this.params, slug});
+    //console.log('Querying with params: ',{...this.params, slug});
     await sleep(2000);
-    return dummyPost;
+    return [dummyPost, dummyPost2][Math.floor(Math.random()*1)];
   }
 }
 
-export default true ? new OfflineClient() : new Client('https://www.elnacional.com/wp-json');
+export default false ? new OfflineClient() : new Client('https://www.elnacional.com/wp-json');
 /*
 export default new Client({
   transport: new FetchTransport(),

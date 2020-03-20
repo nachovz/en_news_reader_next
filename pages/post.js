@@ -7,19 +7,18 @@ import lazyLoadImages from 'utils/images/lazyLoadImages';
 
 const globalParamsPost = {
   per_page: 1,
-  _fields: 'title,excerpt,link,date_gmt,featured_media,_links,slug,categories,yoast_title,yoast_meta,yoast_json_ld',
+  _fields: 'title,content,_embedded,link,date_gmt,modified_gmt,featured_media,_links,slug,categories,yoast_title,yoast_meta,yoast_json_ld',
   _embed: 1,
 };
 
-const PostView = ({ post }) => {
+const PostView = ({ post, cat }) => {
   const [ posts, setPosts] = useState([ post ]);
   const [ loadingMore, setLoadingMore ] = useState(false);
 
   const fetchPost = async () => {
-    console.log(posts);
     const newPost = await client.posts().get({
       ...globalParamsPost,
-      per_page: 10,
+      per_page: 1,
       offset: posts.length,
       categories: posts[0].categories[0],//next post of same category. TO TEST & Validate
     });
@@ -30,8 +29,8 @@ const PostView = ({ post }) => {
     lazyLoadImages();
   }, [loadingMore]);
 
-  typeof window !== 'undefined' && useScrollPosition(({ currPos }) => {
-    console.log((currPos.y*-1) > document.documentElement.scrollHeight - (window.innerHeight*1.5))
+  /*typeof window !== 'undefined' && useScrollPosition(({ currPos }) => {
+    //console.log((currPos.y*-1) > document.documentElement.scrollHeight - (window.innerHeight*1.5))
     if((currPos.y*-1) > document.documentElement.scrollHeight - (window.innerHeight*1.5)){
       setLoadingMore(true);
       fetchPost().then((post) => {
@@ -40,21 +39,21 @@ const PostView = ({ post }) => {
         lazyLoadImages();
       });
     }
-  }, [posts], null, false, 1000);
+  }, [posts], null, false, 1000);*/
 
   return (
     <React.Fragment>
-      {posts.map((post, ind)=> <Post key={ind} {...post}/>)}
-      {posts.length > 0 && <KeepReading />}
+      {posts.map((post, ind)=> <Post key={ind} {...post} cat={cat}/>)}
+      {/*posts.length > 0 && <KeepReading />*/}
       {loadingMore && <Post />}
     </React.Fragment>
   );
 }
 
-PostView.getInitialProps = async function({ query: {  slug } }) {
+PostView.getInitialProps = async function({ query: {  slug, cat } }) {
   client.param(globalParamsPost);
   const post = await client.posts().slug(slug);
-  return { post };
+  return { post, cat };
 };
 
 export default PostView;

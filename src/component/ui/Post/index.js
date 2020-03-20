@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import Head from 'next/head';
 import { Skeleton } from 'component/ui/Skeleton';
 import getBestImage from 'utils/images/getBestImage';
 import tagCleaner from 'utils/tagCleaner';
 import { unicodeToChar } from 'utils/textUtil';
 import { NextSeo } from 'next-seo';
 import { TEXT_SPACING, COLORS, PLACEHOLDER_IMAGE } from 'styles/constants';
+import { routes } from 'data/constants';
 
 const styles = {
   article:{
@@ -18,7 +20,6 @@ const styles = {
     width: `calc(100% - ${TEXT_SPACING*2}px)`,
     maxWidth: '600px',
     fontSize: '1.125rem',
-    paddingTop: TEXT_SPACING
   },
   figure: {
     marginTop: TEXT_SPACING,
@@ -37,46 +38,70 @@ const yoastProcess = (yoast_meta) =>{
   }, {} );
 }
 
-export default ({ title, content, _embedded, excerpt, yoast_title, yoast_meta, yoast_json_ld, ...props }) => {
+export default ({ cat, title, content, _embedded, excerpt, date_gmt, modified_gmt, link, yoast_title, yoast_meta, yoast_json_ld, ...props }) => {
   const [ client, setClient ] = useState(typeof window !== 'undefined');
-  //console.log( yoastProcess(yoast_meta));
   yoast_meta = yoastProcess(yoast_meta);
+  const date = new Date(date_gmt+'Z');
+  const ye = new Intl.DateTimeFormat('es', { year: 'numeric' }).format(date);
+  const mo = new Intl.DateTimeFormat('es', { month: 'long' }).format(date);
+  const da = new Intl.DateTimeFormat('es', { day: '2-digit' }).format(date);
+
   return (
     <article style={styles.article}>
       <NextSeo
         title={yoast_title || ''}
         description={yoast_meta.description || ''}
         openGraph={{
-          type: yoast_meta['og:type'],
-          url: 'https://www.example.com/page',
-          title: 'Open Graph Title',
-          description: 'Open Graph Description',
-          images: [
-            {
-              url: 'https://www.example.ie/og-image.jpg',
-              width: 800,
-              height: 600,
-              alt: 'Og Image Alt',
-            },
-            {
-              url: 'https://www.example.ie/og-image-2.jpg',
-              width: 800,
-              height: 600,
-              alt: 'Og Image Alt 2',
-            },
-          ],
+          canonical: link || yoast_meta['og:url'],
+          locale: yoast_meta['og:locale'] || 'es_VE',
+          type: yoast_meta['og:type'] || 'article',
+          url: link || yoast_meta['og:url'],
+          title: yoast_meta['og:title'] || yoast_title || '',
+          description: yoast_meta['og:description'] || yoast_meta.description || '',
+          site_name: yoast_meta['og:site_name'] || 'El Nacional',
+          ...(_embedded['wp:featuredmedia'] && { images: [
+              {
+                url: yoast_meta['og:image:secure_url'],
+                secure_url: yoast_meta['og:image:secure_url'],
+                width: yoast_meta['og:image:width'],
+                height: yoast_meta['og:image:height'],
+                alt: _embedded['wp:featuredmedia'][0].alt_text || '',
+              }
+            ]
+          }
+          ),
+          article: {
+            publishedTime: `${date_gmt}Z`,
+            modifiedTime: `${modified_gmt}Z`
+          },
+        }}
+        twitter={{
+          cardType: yoast_meta['twitter:card'],
+          description: yoast_meta['twitter:description'],
+          site: yoast_meta['twitter:site'],
+          handle: yoast_meta['twitter:creator'],
+          title: yoast_meta['twitter:title'],
+          image: yoast_meta['twitter:image']
         }}
       />
+      <Head>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{
+            __html: JSON.stringify(yoast_json_ld)}}>
+        </script>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </Head>
       <header style={styles.paddedContent}>
-        <h1>{!!title ?
-            tagCleaner(title.rendered) 
-            : 
-            <span style={styles.skeleton_content}>
-              <Skeleton/>
-            </span>
-        }</h1>
+        <h1>{!!title && tagCleaner(title.rendered) }</h1>
       </header>
-      {!!_embedded ? 
+      {_embedded['author'] &&
+        <div style={{...styles.paddedContent, marginBottom: TEXT_SPACING/2}}>
+          <span><strong>Por</strong> <a style={{textDecoration: 'underline',color: COLORS.primary}} href={_embedded['author'][0].link}>{_embedded['author'][0].name}</a></span>
+        </div>
+      }
+        <div style={{...styles.paddedContent, marginBottom: TEXT_SPACING/2}}>
+          <span>{`${da} de ${mo.charAt(0).toUpperCase() + mo.slice(1)} ${ye}`}</span>
+        </div>
+      {!!_embedded && _embedded["wp:featuredmedia"] && 
         <figure style={styles.figure}> 
             {!!client &&
               <img 
@@ -88,15 +113,9 @@ export default ({ title, content, _embedded, excerpt, yoast_title, yoast_meta, y
               {tagCleaner(_embedded["wp:featuredmedia"]["0"].title.rendered)}
             </figcaption>
         </figure>
-        :
-        <Skeleton height={200} />
       }
       <main>
-        {!!content ? 
-            tagCleaner(content.rendered, 'content') 
-            : 
-            <Skeleton/>
-        }
+        {!!content && tagCleaner(content.rendered, 'content') }
       </main>
     </article>
   );

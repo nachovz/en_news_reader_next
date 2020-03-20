@@ -10,6 +10,7 @@ class MyDocument extends Document {
     return (
       <Html lang="es">
         <Head>
+          <link rel="dns-prefetch" href="https://www.google-analytics.com"/>
           <script dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -21,6 +22,8 @@ class MyDocument extends Document {
           <link rel="preconnect" href="https://www.elnacional.com"/>
           <link rel="preconnect" href="https://googleads.g.doubleclick.net"/>  
           <link rel="dns-prefetch" href="https://static.doubleclick.net"/> 
+          <link rel="dns-prefetch" href="https://fonts.googleapis.com"/> 
+          <link rel="dns-prefetch" href="https://www.googletagmanager.com"/>  
         </Head>
         <body>
           <noscript dangerouslySetInnerHTML={{

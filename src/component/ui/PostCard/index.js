@@ -16,7 +16,7 @@ const styles = {
     height: 250
   },
   title_container:{
-    padding: TEXT_SPACING
+    padding: `${TEXT_SPACING/2}px ${TEXT_SPACING}px`
   },
   title_smaller:{
     fontSize: '1.3em'

@@ -60,12 +60,9 @@ code {
 h1, h2 {
   font-family: 'Merriweather';
   color: inherit;
-  font-weight: bold;
   margin-bottom: 20px;
 }
 h1{
-  font-size: 1.8em;
-  letter-spacing: .05em;
   line-height: 1.1em;
 }
 h2{
@@ -77,16 +74,21 @@ a {
    text-decoration: none;
    color: inherit;
 }
-p {
+p, span {
   font-family: 'Tinos';
-  font-size: 1.2em;
-  line-height: 1.2em;
-  margin-bottom: 16px;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased !important;
   -moz-font-smoothing: antialiased !important;
   text-rendering: optimizelegibility !important;
   letter-spacing: .02em;
+}
+p {
+  line-height: 1.25em;
+  margin-bottom: 16px;
+}
+span {
+  font-size: 0.8em;
+  line-height: 1.2em;
 }
 em {
   font-style: italic;
@@ -101,10 +103,9 @@ figure img{
   height: auto;
 }
 figure figcaption{
-  margin-left: 20px;
+  padding: 8px 20px;
   font-style:italic;
   color:#505050;
-  padding-top: 8px;
 }
 main p {
   color: #060606; 
@@ -114,7 +115,7 @@ main p {
   max-width: 600px; 
   font-size: 1.125rem;
 }
-main h2 {
+main h2, h3, h4, h5, h6 {
   margin: 10px 20px;
 }
 main ul{

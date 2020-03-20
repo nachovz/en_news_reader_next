@@ -2,8 +2,9 @@ import React from 'react';
 import Header from 'component/ui/Header';
 import Footer from 'component/ui/Footer';
 import { HEADER_HEIGHT, SPACING } from 'styles/constants';
-import 'normalize.css';
 import 'styles/index.css';
+import 'normalize.css';
+
 
 function MyApp({ Component, pageProps }) {
   return (

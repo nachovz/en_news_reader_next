@@ -60,7 +60,7 @@ const Home = ({ posts, cat }) => {
   }, [loadingMore]);
 
   typeof window !== 'undefined' && useScrollPosition(({ currPos }) => {
-    console.log((currPos.y*-1) > document.documentElement.scrollHeight - (window.innerHeight*1.5))
+    //console.log((currPos.y*-1) > document.documentElement.scrollHeight - (window.innerHeight*1.5))
     if((currPos.y*-1) > document.documentElement.scrollHeight - (window.innerHeight*1.5)){
       setLoadingMore(true);
       fetchPosts(state.page+10, [viewState]).then((posts) => {

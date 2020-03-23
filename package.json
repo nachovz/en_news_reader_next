@@ -18,6 +18,7 @@
     "next-routes": "^1.4.2",
     "next-seo": "^4.4.0",
     "normalize.css": "^8.0.1",
+    "now": "^17.0.4",
     "now-cli": "0.0.0",
     "react": "16.13.0",
     "react-burger-menu": "^2.6.13",

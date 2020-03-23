@@ -44,8 +44,8 @@ const fetchPosts = async (page=0, filter=[]) => {
   return posts;
 };
 
-const Home = ({ posts, cat }) => {
-  const route = routes[cat] ? routes[cat].value:routes['/'].value;
+const Home = ({ posts=[], cat='home', noMenu=false }) => {
+  const route = routes[cat] ? routes[cat].value:routes['home'].value;
   const [ state, setState ] = useState({ 
     filter: [route], 
     page: 0, 
@@ -111,18 +111,20 @@ const Home = ({ posts, cat }) => {
           ],
         }}
       />
-      <div id="nav_menu" style={styles.nav_menu}>
-        {menuElements.map( (elem, ind) => (
-          <span 
-            key={ind} 
-            className={elem.value === viewState ? 'active':''}
-            onClick={() => changeCategory(elem)}
-          >
-            {elem.tag}
-          </span>
-        ))}
-        &nbsp;
-      </div>
+      {!noMenu &&
+        <div id="nav_menu" style={styles.nav_menu}>
+          {menuElements.map( (elem, ind) => (
+            <span 
+              key={ind} 
+              className={elem.value === viewState ? 'active':''}
+              onClick={() => changeCategory(elem)}
+            >
+              {elem.tag}
+            </span>
+          ))}
+          &nbsp;
+        </div>
+      }
       <div style={styles.article_wrapper}>
         {state.posts.map((post, ind) => {
           return(

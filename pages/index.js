@@ -11,14 +11,14 @@ const HomePage = (props) => {
   return (<Home {...props}/>)
 };
 
-HomePage.getInitialProps = async function( { asPath } ) {
-  const posts = !routes[asPath] ? null : await client.posts().get({
+HomePage.getInitialProps = async function( { query: { slug } } ) {
+  const posts = await client.posts().get({
     per_page: 10,
-    ...parseFilter([routes[asPath].value]),
+    ...parseFilter([routes['home'].value]),
     _fields: 'title,excerpt,link,date_gmt,featured_media,_links,slug',
     _embed: 1,
   });
-  return { posts, cat: asPath };
+  return { posts, cat: 'home' };
 };
 
 export default HomePage;

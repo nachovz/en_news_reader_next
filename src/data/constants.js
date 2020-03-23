@@ -100,7 +100,7 @@ export const menuElements = [
 ];
 
 export const routes = {
-  '': {
+  'home': {
     value: 'ultima-hora',
     tag: 'DESTACADO'
   },

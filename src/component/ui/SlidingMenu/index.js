@@ -41,7 +41,7 @@ export default function({opened, handleMouseDown}){
       style={{...styles.flyoutMenu, ...opened ? styles.show : styles.hide} }>
       {menuElements.map( (elem, ind) => (
         <h2 key={ind}>
-          <Link href={elem.slug}>
+          <Link href="/[cat]/" as={elem.slug}>
             <a style={styles.links}>{elem.tag}</a>
           </Link>
         </h2>

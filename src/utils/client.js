@@ -1,12 +1,6 @@
 import 'isomorphic-unfetch';
 import Client from '@wp-headless/client';
 //import FetchTransport from '@wp-headless/transport-fetch';
-import dummy from 'data/posts.json';
-import dummy2 from 'data/posts2.json';
-import dummy3 from 'data/posts3.json';
-import dummyPost from 'data/post.json';
-import dummyPost2 from 'data/post2.json';
-
 
 const isLocalhost = Boolean( 
   typeof window === 'undefined' || 
@@ -21,33 +15,8 @@ const isLocalhost = Boolean(
     window.location.hostname.indexOf('gitpod.io')
 );
 
-const sleep = (milliseconds) => {
-  return new Promise(resolve => setTimeout(resolve, milliseconds))
-}
 
-class OfflineClient {
-  params = {};
-  param = (params) =>{
-    this.params = params;
-  }
-  posts = () => {
-    return this;
-  }
-  
-  get = async () =>{
-    //console.log('Querying with params: ',this.params);
-    await sleep(2000);
-    return [dummy, dummy2, dummy3][Math.floor(Math.random()*3)];
-  }
-
-  slug = async (slug) =>{
-    //console.log('Querying with params: ',{...this.params, slug});
-    await sleep(2000);
-    return [dummyPost, dummyPost2][Math.floor(Math.random()*1)];
-  }
-}
-
-export default false ? new OfflineClient() : new Client('https://www.elnacional.com/wp-json');
+export default new Client('https://www.elnacional.com/wp-json');
 /*
 export default new Client({
   transport: new FetchTransport(),

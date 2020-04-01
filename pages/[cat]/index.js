@@ -13,7 +13,7 @@ const HomePage = (props) => {
 
 HomePage.getInitialProps = async function( { query: { cat } } ) {
   const posts = !routes[cat] ? null : await client.posts().get({
-    per_page: 10,
+    per_page: 20,
     ...parseFilter([routes[cat].value]),
     _fields: 'title,excerpt,link,date_gmt,featured_media,_links,slug',
     _embed: 1,

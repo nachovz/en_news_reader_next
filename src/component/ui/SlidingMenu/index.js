@@ -1,4 +1,6 @@
 import React from 'react';
+import Link from 'next/link';
+import { menuElements } from 'data/constants';
 import { COLORS, TEXT_SPACING, HEADER_CALC } from 'styles/constants';
 
 const styles = {
@@ -37,10 +39,13 @@ export default function({opened, handleMouseDown}){
     <div
       onMouseDown={handleMouseDown}
       style={{...styles.flyoutMenu, ...opened ? styles.show : styles.hide} }>
-      <h2><a style={styles.links} href="/">Home</a></h2>
-      <h2><a style={styles.links} href="https://www.elnacional.com">About</a></h2>
-      <h2><a style={styles.links} href="https://www.elnacional.com">Contact</a></h2>
-      <h2><a style={styles.links} href="https://www.elnacional.com">Search</a></h2>  
+      {menuElements.map( (elem, ind) => (
+        <h2 key={ind}>
+          <Link href={elem.slug}>
+            <a style={styles.links}>{elem.tag}</a>
+          </Link>
+        </h2>
+      ))}
     </div>
   )
 }

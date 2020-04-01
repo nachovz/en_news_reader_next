@@ -54,7 +54,6 @@ const PostView = ({ post, cat }) => {
 }
 
 PostView.getInitialProps = async function({ query: {  slug, cat } }) {
-  console.log('SLUG')
   client.param(globalParamsPost);
   const post = await client.posts().slug(slug);
   return { post, cat };

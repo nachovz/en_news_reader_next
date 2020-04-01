@@ -45,7 +45,7 @@ export const MAP_ID = {
     type: 'categories',
     value: 38
   },
-  'life-style	': {
+  'life-style': {
     type: 'categories',
     value: 308
   }

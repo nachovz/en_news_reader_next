@@ -147,7 +147,8 @@ main iframe{
 }
 #nav_menu > span.active{
   color: white;
-  background: #011689
+  background: #011689;
+  order: -1;
 }
 .skeleton_element{
   background-color: #a0a0a0;

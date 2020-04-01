@@ -14,11 +14,11 @@
     "@testing-library/user-event": "^7.1.2",
     "@wp-headless/client": "^0.9.4",
     "isomorphic-unfetch": "^3.0.0",
-    "next": "9.2.2",
+    "next": "^9.3.3",
     "next-routes": "^1.4.2",
     "next-seo": "^4.4.0",
     "normalize.css": "^8.0.1",
-    "now": "^17.0.4",
+    "now": "^17.1.1",
     "now-cli": "0.0.0",
     "react": "16.13.0",
     "react-burger-menu": "^2.6.13",
@@ -28,5 +28,8 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.1",
     "unfetch": "^4.1.0"
+  },
+  "devDependencies": {
+    "minimist": "^1.2.5"
   }
 }

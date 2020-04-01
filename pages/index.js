@@ -11,9 +11,9 @@ const HomePage = (props) => {
   return (<Home {...props}/>)
 };
 
-HomePage.getInitialProps = async function( { query: { slug } } ) {
+HomePage.getInitialProps = async function() {
   const posts = await client.posts().get({
-    per_page: 10,
+    per_page: 20,
     ...parseFilter([routes['home'].value]),
     _fields: 'title,excerpt,link,date_gmt,featured_media,_links,slug',
     _embed: 1,

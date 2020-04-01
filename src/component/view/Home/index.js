@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import client from 'utils/client';
 import { NextSeo } from 'next-seo';
-import { useScrollPosition } from '@n8tb1t/use-scroll-position';
+import useInfiniteScroll from 'hook/useInfiniteScroll';
 import PostCard from 'component/ui/PostCard';
 import AdUnit from 'component/ui/AdUnit';
 import { Skeleton } from 'component/ui/Skeleton';
@@ -46,43 +46,37 @@ const fetchPosts = async (page=0, filter=[]) => {
 
 const Home = ({ posts=[], cat='home', noMenu=false }) => {
   const route = routes[cat] ? routes[cat].value:routes['home'].value;
-  const [ state, setState ] = useState({ 
-    filter: [route], 
-    page: 0, 
-    posts: [...posts] 
+  const [ state, setState ] = useState({
+    page: 10, 
+    posts: [...posts],
+    loadingMore: false 
   });
-  const [ viewState, setViewState ] = useState(route)
-  const [ loadingMore, setLoadingMore] = useState(true);
+  const [ isFetching, setIsFetching ] = useInfiniteScroll(fetchMorePosts) 
+  const [ viewState, setViewState ] = useState(route);
+  const horizontalNav = useRef(null);
 
   useEffect(() => {
-    //setLoadingMore(typeof window !== 'undefined')
     lazyLoadImages();
-  }, [loadingMore]);
+    typeof window !== 'undefined' && window.scrollTo(0, 0);
+  }, []);
 
-  typeof window !== 'undefined' && useScrollPosition(({ currPos }) => {
-    //console.log((currPos.y*-1) > document.documentElement.scrollHeight - (window.innerHeight*1.5))
-    if((currPos.y*-1) > document.documentElement.scrollHeight - (window.innerHeight*1.5)){
-      setLoadingMore(true);
-      fetchPosts(state.page+10, [viewState]).then((posts) => {
-        setState({ ...state, page: state.page+10, posts: [...state.posts,...posts]});
-        setLoadingMore(false);
-        lazyLoadImages();
-      });
-      
-    }
-  }, [state.posts], null, false, 1000);
+  function fetchMorePosts () {
+    fetchPosts(state.page+10, [viewState]).then((posts) => {
+      setState( prevState => ({ ...prevState, page: state.page+10, posts: [...prevState.posts,...posts]}));
+      setIsFetching(false);
+      lazyLoadImages();
+    });
+  }
 
   const changeCategory = (elem) =>{
     setViewState(elem.value);
     window.history.replaceState({}, '', elem.slug);
-    setLoadingMore(true);
-    setState({filter: [elem.value], page: 0, posts: []});
     typeof window !== 'undefined' && window.scrollTo(0, 0);
+    setState({ page: 0, posts: []});
     fetchPosts(0, [elem.value]).then((posts) => {
-      setState( 
-        s => ({ filter: [elem.value], page: 0, posts: [...posts] })
-      );
-      setLoadingMore(false);
+      setState({ page: 0, filter: [elem.value], posts: [...posts] });
+      lazyLoadImages();
+      horizontalNav.current.scrollLeft = 0;
     });
   }
   return (
@@ -112,7 +106,7 @@ const Home = ({ posts=[], cat='home', noMenu=false }) => {
         }}
       />
       {!noMenu &&
-        <div id="nav_menu" style={styles.nav_menu}>
+        <div id="nav_menu" ref={horizontalNav} style={styles.nav_menu}>
           {menuElements.map( (elem, ind) => (
             <span 
               key={ind} 
@@ -126,7 +120,7 @@ const Home = ({ posts=[], cat='home', noMenu=false }) => {
         </div>
       }
       <div style={styles.article_wrapper}>
-        {state.posts.map((post, ind) => {
+        {state.posts.length > 0 ? state.posts.map((post, ind) => {
           return(
             <React.Fragment key={ind}>
               <PostCard noImage={ind % 3} margin={(ind+1) % 3 === 0} {...post} />
@@ -135,11 +129,16 @@ const Home = ({ posts=[], cat='home', noMenu=false }) => {
               }
             </React.Fragment>
           )
-        })}
-        {loadingMore && 
+        })
+        :
+          <>
+            <Skeleton />
+            <Skeleton />
+          </>
+        }
         <div>
-          <Skeleton />
-        </div>}
+          {isFetching && <Skeleton />}
+        </div>
       </div>
     </div>
   );

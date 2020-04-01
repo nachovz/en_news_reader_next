@@ -32,9 +32,10 @@ function CustomError({ statusCode }) {
   const [ posts, setPosts ] = useState([]);
 
   useEffect(()=>{
-    fetchPosts().then((posts)=>{
+    /*fetchPosts().then((posts)=>{
       setPosts(posts);
-    })
+    });*/
+    console.log('called');
   });
 
   let title = '';

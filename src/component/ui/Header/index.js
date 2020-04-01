@@ -36,7 +36,9 @@ export default function (){
         <HamburgerMenu isOpen={opened} menuClicked={() => setOpened(!opened)} />
       </div>
       <div style={styles.header_logo}>
-        <img src={logoSize()} height={HEADER_HEIGHT} alt="Logo El Nacional Venezuela"/>
+        <a href="/home">
+          <img src={logoSize()} height={HEADER_HEIGHT} alt="Logo El Nacional Venezuela"/>
+        </a>
       </div>
       <div style={styles.header_extras}></div>
       <SlidingMenu opened={opened} handleMouseDown={() => setOpened(false)}/>

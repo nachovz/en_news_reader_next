@@ -19,7 +19,7 @@ export default (ren, type='title', lazyLoaded=false) => {
       .replace(/<blockquote/g,`<div class="wrapped-content"><blockquote`)
       .replace(/<\/blockquote>/g,`</blockquote></div>`)
       .replace(/<a href="https:\/\/www.elnacional.com/g, '<a href="')
-
+      .replace(/style="color: rgb(0, 204, 255);"/g, '')
   );
   
   if(type==='title') return parsed;

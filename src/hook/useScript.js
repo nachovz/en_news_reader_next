@@ -8,7 +8,6 @@ const useScript = (url, np) => {
     script.async = true;
 
     document.body.appendChild(script);
-    console.log("inyecta script: ",url,np);
 
     return () => {
       document.body.removeChild(script);

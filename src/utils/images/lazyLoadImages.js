@@ -1,4 +1,4 @@
-function lazyLoadImages(selector = 'img') {
+function lazyLoadImages(selector = 'img, iframe') {
   //console.log('LAZY LOADING!')
     function createObserver() {
         const elements = document.querySelectorAll(selector);
@@ -7,6 +7,7 @@ function lazyLoadImages(selector = 'img') {
                 if (entry.isIntersecting && entry.target.getAttribute('data-src')) {
                     entry.target.src = entry.target.getAttribute('data-src');
                     entry.target.removeAttribute('data-src');
+                    entry.target.parentNode.getElementsByTagName('figcaption')[0] && entry.target.parentNode.getElementsByTagName('figcaption')[0].setAttribute('style','display:block;');
                     observerChild.unobserve(entry.target);
                 }
             });

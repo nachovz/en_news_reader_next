@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const useScript = url => {
+const useScript = (url, np) => {
   useEffect(() => {
     const script = document.createElement('script');
 
@@ -8,11 +8,12 @@ const useScript = url => {
     script.async = true;
 
     document.body.appendChild(script);
+    console.log("inyecta script: ",url,np);
 
     return () => {
       document.body.removeChild(script);
     }
-  }, [url]);
+  }, [url, np]);
 };
 
 export default useScript;

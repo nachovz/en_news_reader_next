@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
-import { Skeleton } from 'component/ui/Skeleton';
 import getBestImage from 'utils/images/getBestImage';
 import tagCleaner from 'utils/tagCleaner';
-import { unicodeToChar } from 'utils/textUtil';
 import { NextSeo } from 'next-seo';
 import { TEXT_SPACING, COLORS, PLACEHOLDER_IMAGE } from 'styles/constants';
-import { routes } from 'data/constants';
 import useScript from 'hook/useScript';
 
 const styles = {
@@ -21,6 +18,11 @@ const styles = {
     width: `calc(100% - ${TEXT_SPACING*2}px)`,
     maxWidth: '600px',
     fontSize: '1.125rem',
+  },
+  author_dateContainer:{
+    marginBottom: TEXT_SPACING/2,
+    display: 'flex',
+    justifyContent: 'space-between'
   },
   figure: {
     marginTop: TEXT_SPACING,
@@ -37,17 +39,39 @@ const yoastProcess = (yoast_meta) =>{
     final[(meta.name || meta.property || 'key')] = (meta.content || 'value');
     return final;
   }, {} );
+};
+
+const getDates = (date_gmt) =>{
+  let ye = '';
+  let mo = ''; 
+  let da = '';
+  if(!!date_gmt){
+    const date = new Date(date_gmt+'Z');
+    ye = new Intl.DateTimeFormat('es', { year: 'numeric' }).format(date);
+    mo = new Intl.DateTimeFormat('es', { month: 'long' }).format(date);
+    da = new Intl.DateTimeFormat('es', { day: '2-digit' }).format(date);
+  }
+  return { ye, mo, da};
 }
 
-export default ({ cat, title, content, _embedded, excerpt, date_gmt, modified_gmt, link, yoast_title, yoast_meta, yoast_json_ld, ...props }) => {
+export default ({ 
+  title, 
+  content, 
+  _embedded, 
+  date_gmt, 
+  modified_gmt, 
+  link, 
+  yoast_title, 
+  yoast_meta=[], 
+  yoast_json_ld, 
+  lazyLoaded=false
+}) => {
   const [ client, setClient ] = useState(typeof window !== 'undefined');
-  useScript('https://platform.twitter.com/widgets.js');
-  useScript('https://www.instagram.com/embed.js');
+  useScript('https://platform.twitter.com/widgets.js', title);
+  useScript('https://www.instagram.com/embed.js', title);
   yoast_meta = yoastProcess(yoast_meta);
-  const date = new Date(date_gmt+'Z');
-  const ye = new Intl.DateTimeFormat('es', { year: 'numeric' }).format(date);
-  const mo = new Intl.DateTimeFormat('es', { month: 'long' }).format(date);
-  const da = new Intl.DateTimeFormat('es', { day: '2-digit' }).format(date);
+  const { ye, mo, da } = getDates(date_gmt);
+  if(!_embedded) return null;
 
   return (
     <article style={styles.article}>
@@ -93,16 +117,18 @@ export default ({ cat, title, content, _embedded, excerpt, date_gmt, modified_gm
         </script>
       </Head>
       <header style={styles.paddedContent}>
-        <h1>{!!title && tagCleaner(title.rendered) }</h1>
+        <h1 style={{fontSize: '1.7em'}}>{!!title && tagCleaner(title.rendered) }</h1>
       </header>
-      {_embedded['author'] &&
-        <div style={{...styles.paddedContent, marginBottom: TEXT_SPACING/2}}>
-          <span><strong>Por</strong> <a style={{textDecoration: 'underline',color: COLORS.primary}} href={_embedded['author'][0].link}>{_embedded['author'][0].name}</a></span>
-        </div>
-      }
-        <div style={{...styles.paddedContent, marginBottom: TEXT_SPACING/2}}>
+      <div style={{...styles.paddedContent, ...styles.author_dateContainer}}>
+        <>
+          {_embedded['author'] &&
+            <span><strong>Por</strong> <a style={{textDecoration: 'underline',color: COLORS.primary}} href={_embedded['author'][0].link}>{_embedded['author'][0].name}</a></span>
+          }  
+        </>
+        <>
           <span>{`${da} de ${mo.charAt(0).toUpperCase() + mo.slice(1)} ${ye}`}</span>
-        </div>
+        </>
+      </div>
       {!!_embedded && _embedded["wp:featuredmedia"] && 
         <figure style={styles.figure}> 
             {!!client &&
@@ -117,7 +143,7 @@ export default ({ cat, title, content, _embedded, excerpt, date_gmt, modified_gm
         </figure>
       }
       <main >
-        {!!content && tagCleaner(content.rendered, 'content') }
+        {!!content && tagCleaner(content.rendered, 'content', lazyLoaded) }
       </main>
     </article>
   );

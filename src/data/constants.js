@@ -3,6 +3,16 @@ export const SITE_URL = 'https://www.elnacional.com';
 //AD unit types
 export const AD_BOX = 'box';
 export const AD_BANNER = 'banner';
+export const AD_SIZES = {
+  [AD_BOX]: {
+    code: '/13733557007/Box1',
+    size: [300,250]
+  },
+  [AD_BANNER]: {
+    code: '/13733557007/Flat1',
+    size: [320,50]
+  }
+}
 
 export const MAP_ID = {
   'principal-portada': {

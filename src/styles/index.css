@@ -63,16 +63,21 @@ h1, h2 {
   margin-bottom: 20px;
 }
 h1{
-  line-height: 1.1em;
+  font-size: 1.7em;
+  line-height: 1.3em;
 }
 h2{
-  font-size: 1.5em;
+  font-size: 1.3em;
   line-height: 1.3em;
   letter-spacing: .03em;
 }
 a {
    text-decoration: none;
    color: inherit;
+}
+main a{
+  text-decoration: underline;
+  color:#011689;
 }
 p, span {
   font-family: 'Tinos';

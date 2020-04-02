@@ -51,7 +51,7 @@ const Home = ({ posts=[], cat='home', noMenu=false }) => {
     posts: [...posts],
     loadingMore: false 
   });
-  const [ isFetching, setIsFetching ] = useInfiniteScroll(fetchMorePosts) 
+  const [ isFetching, setIsFetching ] = useInfiniteScroll(fetchMorePosts); 
   const [ viewState, setViewState ] = useState(route);
   const horizontalNav = useRef(null);
 
@@ -125,7 +125,10 @@ const Home = ({ posts=[], cat='home', noMenu=false }) => {
             <React.Fragment key={ind}>
               <PostCard noImage={ind % 3} margin={(ind+1) % 3 === 0} {...post} />
               {(ind+1) % 3 === 0 &&
-                <AdUnit type={ind % 2 === 0 ? AD_BOX: AD_BANNER }/>
+                <AdUnit 
+                  type={ind % 2 === 0 ? AD_BOX: AD_BANNER }
+                  unitId={`gtp-en-${ind}`}
+                />
               }
             </React.Fragment>
           )

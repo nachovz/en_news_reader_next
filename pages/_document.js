@@ -23,7 +23,8 @@ class MyDocument extends Document {
           <link rel="preconnect" href="https://www.elnacional.com"/>
           <link rel="preconnect" href="https://googleads.g.doubleclick.net"/>  
           <link rel="dns-prefetch" href="https://static.doubleclick.net"/> 
-          <link rel="preconnect" href="https://fonts.googleapis.com"/>   
+          <link rel="preconnect" href="https://fonts.googleapis.com"/>
+          <script async="async" src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>   
         </Head>
         <body>
           <noscript dangerouslySetInnerHTML={{
@@ -31,6 +32,7 @@ class MyDocument extends Document {
           height="0" width="0" style="display:none;visibility:hidden"></iframe>`}}></noscript>
           <Main />
           <NextScript />
+          
         </body>
       </Html>
     )

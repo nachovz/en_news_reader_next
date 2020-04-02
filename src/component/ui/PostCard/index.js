@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { SkeletonImage } from 'component/ui/Skeleton';
 import tagCleaner from 'utils/tagCleaner';
 import { urlCleaner } from 'utils/urlUtil';
@@ -57,7 +57,7 @@ export default function({
                   data-src={getBestImage(_embedded["wp:featuredmedia"]["0"].media_details.sizes)} 
                   alt={_embedded["wp:featuredmedia"]["0"].title.rendered} 
                 />
-                <figcaption>
+                <figcaption style={{display: 'none'}}>
                   {tagCleaner(_embedded["wp:featuredmedia"]["0"].title.rendered)}
                 </figcaption>
               </>

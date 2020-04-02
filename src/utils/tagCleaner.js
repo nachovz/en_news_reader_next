@@ -3,7 +3,7 @@ import ReactHtmlParser from 'react-html-parser';
 import AdUnit from 'component/ui/AdUnit';
 import { DEVICE_WIDTH } from 'styles/constants';
 
-export default (ren, type='title') => {
+export default (ren, type='title', lazyLoaded=false) => {
   const parsed = ReactHtmlParser(
     ren.replace(/style="text-align: justify;"/g, '')
       .replace(/&#171;/g, '“<em>')
@@ -18,6 +18,7 @@ export default (ren, type='title') => {
       .replace(/http:\/\/www.elnacional.com/g, `https://www.elnacional.com`)
       .replace(/<blockquote/g,`<div class="wrapped-content"><blockquote`)
       .replace(/<\/blockquote>/g,`</blockquote></div>`)
+      .replace(/<a href="https:\/\/www.elnacional.com/g, '<a href="')
 
   );
   
@@ -31,11 +32,18 @@ export default (ren, type='title') => {
     const isP = node.type === 'p';
     if(isP){
       if(top && inset){
-        withAds.push(<AdUnit key={`ad_${ind}`} />)
+        withAds.push(<AdUnit 
+          key={`ad_${ind}`} 
+          unitId={`gtp-en${Date.now()}-${ind}`} 
+          lazyLoaded={lazyLoaded}/>
+        )
       }
       withAds.push(node);
       if(!top && inset) {
-        withAds.push(<AdUnit key={`ad_${ind}`} />)
+        withAds.push(<AdUnit 
+          key={`ad_${ind}`} 
+          unitId={`gtp-en${Date.now()}-${ind}`} 
+          lazyLoaded={lazyLoaded}/>)
       }
       paragraphs++;
     }else{

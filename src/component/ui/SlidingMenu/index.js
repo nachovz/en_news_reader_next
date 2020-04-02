@@ -27,9 +27,6 @@ const styles = {
     color: COLORS.primary,
     marginLeft: 15,
     textDecoration: 'none',
-    "&:hover": {
-      textDecoration: 'underline',
-    },
     textTransform: 'uppercase'
   }
 };

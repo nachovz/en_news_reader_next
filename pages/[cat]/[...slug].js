@@ -37,9 +37,8 @@ const PostView = ({ post, cat }) => {
     fetchPost().then((post) => {
       if(post.length > 0){
         setPosts( [...posts, { ...post[0], lazyLoaded: true } ] );
-        console.log(post[0].title.rendered);
         const title = post[0].title.rendered || '';
-        window.history.replaceState({}, title, post[0].slug);
+        window.history.replaceState({}, title, (window.location.href.endsWith('/') ? '../' : '') + post[0].slug);
         setIsFetching(false);
         lazyLoadImages();
       }

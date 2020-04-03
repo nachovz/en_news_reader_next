@@ -27,10 +27,9 @@ export default (ren, type='title', lazyLoaded=false) => {
   let withAds = [];
   let paragraphs = 1;
   parsed.forEach( (node, ind) => {
-    const inset = paragraphs % 4 === 0;
+    const inset = paragraphs % 4 === 0 || paragraphs === 2;
     const top = !!node.type.match(/h2|iframe|h3|h4|h5|h6/);
-    const isP = node.type === 'p';
-    if(isP){
+    if(node.type === 'p'){
       if(top && inset){
         withAds.push(<AdUnit 
           key={`ad_${ind}`} 

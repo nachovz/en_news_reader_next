@@ -123,7 +123,7 @@ export default ({
           <span>{`${da} de ${mo.charAt(0).toUpperCase() + mo.slice(1)} ${ye}`}</span>
         </>
       </div>
-      {!!_embedded && _embedded["wp:featuredmedia"] && _embedded["wp:featuredmedia"].title &&
+      {!!_embedded && _embedded["wp:featuredmedia"] && _embedded["wp:featuredmedia"]["0"] && _embedded["wp:featuredmedia"]["0"].title &&
         <figure style={styles.figure}> 
             {!!client &&
               <img 

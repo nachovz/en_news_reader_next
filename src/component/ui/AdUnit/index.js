@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { AD_BOX, AD_BANNER, AD_SIZES } from 'data/constants';
-import { BORDER_STYLE, COLORS, TEXT_SPACING } from 'styles/constants';
+import { COLORS, TEXT_SPACING } from 'styles/constants';
 import {Bling as GPT} from "react-gpt";
 
 const styles={
@@ -33,7 +33,7 @@ export default function({ type=AD_BOX }) {
   return(
     <div style={styles.unit_container}>
       <span style={styles.unit_default_text}>Publicidad</span>
-      <div style={{...styles.unit_block, ...styles[type]}}>
+      <div style={{...styles.unit_block}}>
       {typeof window !== 'undefined' &&
           <GPT
             adUnitPath={AD_SIZES[type].code}

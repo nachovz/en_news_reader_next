@@ -1,5 +1,4 @@
 import React from 'react';
-import { SPACING, COLORS } from 'styles/constants';
 
 const styles = {
   skeleton_big_line:{
@@ -13,25 +12,22 @@ const styles = {
   }
 };
 
-export const Skeleton = ({ full=false }) => (
-  <div style={{minHeight: '50vh'}}>
-    {!!full && 
-      <React.Fragment>
-        <div className="skeleton_element" style={styles.skeleton_big_line}></div>
-        <div className="skeleton_element" style={styles.skeleton_big_line} ></div>
-        <div className="skeleton_element" style={styles.skeleton_big_line}></div>
-      </React.Fragment>
-    }
-    <div className="skeleton_element" style={styles.skeleton_image}></div>
-    <div className="skeleton_element" style={styles.skeleton_small_line}></div>
-    <div className="skeleton_element" style={styles.skeleton_small_line}></div>
-    <div className="skeleton_element" style={styles.skeleton_small_line}></div>
-    <div className="skeleton_element" style={styles.skeleton_small_line}></div>
-    <div className="skeleton_element" style={styles.skeleton_small_line}></div>
-  </div>
-);
-
-export const SkeletonImage = ({ full=false }) => (
-  <div className="skeleton_element" style={styles.skeleton_image}></div>
-
-);
+export default function({ full=false }){
+  return(
+    <div style={{minHeight: '50vh'}}>
+      {!!full && 
+        <React.Fragment>
+          <div className="skeleton_element" style={styles.skeleton_big_line}></div>
+          <div className="skeleton_element" style={styles.skeleton_big_line} ></div>
+          <div className="skeleton_element" style={styles.skeleton_big_line}></div>
+        </React.Fragment>
+      }
+      <div className="skeleton_element" style={styles.skeleton_image}></div>
+      <div className="skeleton_element" style={styles.skeleton_small_line}></div>
+      <div className="skeleton_element" style={styles.skeleton_small_line}></div>
+      <div className="skeleton_element" style={styles.skeleton_small_line}></div>
+      <div className="skeleton_element" style={styles.skeleton_small_line}></div>
+      <div className="skeleton_element" style={styles.skeleton_small_line}></div>
+    </div>
+  )
+};

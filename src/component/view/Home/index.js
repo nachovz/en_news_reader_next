@@ -1,14 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Head from 'next/head';
+import dynamic from "next/dynamic";
 import client from 'utils/client';
 import { NextSeo } from 'next-seo';
 import useInfiniteScroll from 'hook/useInfiniteScroll';
 import PostCard from 'component/ui/PostCard';
 import AdUnit from 'component/ui/AdUnit';
-import { Skeleton } from 'component/ui/Skeleton';
 import lazyLoadImages from 'utils/images/lazyLoadImages';
 import parseFilter from 'utils/parseFilter';
 import { BORDER_STYLE, COLORS } from 'styles/constants';
 import { AD_BOX, AD_BANNER, menuElements, routes } from 'data/constants';
+import yoastProcess from 'utils/yoastProcess';
+
+const Skeleton = dynamic(() => import('component/ui/Skeleton'), { ssr: false });
 
 const styles = {
   nav_menu: {
@@ -44,16 +48,23 @@ const fetchPosts = async (page=0, filter=[]) => {
   return posts;
 };
 
-const Home = ({ posts=[], cat='home', noMenu=false }) => {
-  const route = routes[cat] ? routes[cat].value:routes['home'].value;
+const Home = ({ 
+  posts=[], 
+  cat='home', 
+  noMenu=false, 
+  yoast=null
+}) => {
   const [ state, setState ] = useState({
     page: 10, 
     posts: [...posts],
     loadingMore: false 
   });
   const [ isFetching, setIsFetching ] = useInfiniteScroll(fetchMorePosts); 
-  const [ viewState, setViewState ] = useState(route);
+  const [ viewState, setViewState ] = useState(routes[cat] && routes[cat].value);
   const horizontalNav = useRef(null);
+  const { yoast_title, yoast_meta, yoast_json_ld } = yoast || { yoast_title:'', yoast_meta:[], yoast_json_ld:{} };
+  const parsed_yoast_meta = yoastProcess(yoast_meta);
+  
 
   useEffect(() => {
     lazyLoadImages();
@@ -79,32 +90,33 @@ const Home = ({ posts=[], cat='home', noMenu=false }) => {
       horizontalNav.current.scrollLeft = 0;
     });
   }
+  const { tag, value } = (cat === 'home' || !routes[cat]) ? { tag: '', value: '' }:routes[cat];
   return (
     <div>
       <NextSeo
-        title={"El Nacional"}
-        description={"Diario El Nacional de Venezuela"}
+        title={(!!tag ? `${tag} - `:'')+(yoast_title || "El Nacional")}
+        description={parsed_yoast_meta.description || ''}
         openGraph={{
           type: 'website',
-          url: 'https://www.example.com/page',
-          title: 'Open Graph Title',
-          description: 'Open Graph Description',
-          images: [
-            {
-              url: 'https://www.example.ie/og-image.jpg',
-              width: 800,
-              height: 600,
-              alt: 'Og Image Alt',
-            },
-            {
-              url: 'https://www.example.ie/og-image-2.jpg',
-              width: 800,
-              height: 600,
-              alt: 'Og Image Alt 2',
-            },
-          ],
+          locale: parsed_yoast_meta['og:locale'] || 'es_VE',
+          url: (parsed_yoast_meta['og:url'] || 'https://www.elnacional.com/')+value,
+          canonical: (parsed_yoast_meta['og:url'] || 'https://www.elnacional.com/')+value,
+          title: (!!tag ? `${tag} - `:'')+(yoast_title || "El Nacional"),
+          site_name: parsed_yoast_meta['og:site_name'] || 'El Nacional',
+          description: parsed_yoast_meta.description || '',
+        }}
+        twitter={{
+          description: parsed_yoast_meta['twitter:description'],
+          site: parsed_yoast_meta['twitter:site'],
+          handle: parsed_yoast_meta['twitter:creator'],
+          title: parsed_yoast_meta['twitter:title']
         }}
       />
+      <Head>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{
+            __html: JSON.stringify(yoast_json_ld)}}>
+        </script>
+      </Head>
       {!noMenu &&
         <div id="nav_menu" ref={horizontalNav} style={styles.nav_menu}>
           {menuElements.map( (elem, ind) => (

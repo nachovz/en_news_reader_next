@@ -1,10 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 
 class MyDocument extends Document {
-  static async getInitialProps(ctx) {
-    const initialProps = await Document.getInitialProps(ctx)
-    return { ...initialProps }
-  }
 
   render() {
     return (
@@ -37,31 +33,39 @@ class MyDocument extends Document {
 
           <meta name="screen-orientation" content="portrait"/>
 
-          <link href="favicon-16.png" rel="icon" type="image/png" sizes="16x16"/>
-          <link href="favicon-32.png" rel="icon" type="image/png" sizes="32x32"/>
-          <link href="favicon-48.png" rel="icon" type="image/png" sizes="48x48"/>
+          <link href="/images/favicon-16.png" rel="icon" type="image/png" sizes="16x16"/>
+          <link href="/images/favicon-32.png" rel="icon" type="image/png" sizes="32x32"/>
+          <link href="/images/favicon-96.png" rel="icon" type="image/png" sizes="96x96"/>
 
-          <link href="touch-icon-iphone.png" rel="apple-touch-icon"/>
-          <link href="touch-icon-ipad.png" rel="apple-touch-icon" sizes="76x76"/>
-          <link href="touch-icon-iphone-retina.png" rel="apple-touch-icon" sizes="120x120"/>
-          <link href="touch-icon-ipad-retina.png" rel="apple-touch-icon" sizes="152x152"/>
+          <link href="/images/apple-icon-57x57.png" rel="apple-touch-icon"/>
+          <link href="/images/apple-icon-76x76.png" rel="apple-touch-icon" sizes="76x76"/>
+          <link href="/images/apple-icon-120x120.png" rel="apple-touch-icon" sizes="120x120"/>
+          <link href="/images/apple-icon-152x152.png" rel="apple-touch-icon" sizes="152x152"/>
 
-          <link href="touch-icon-start-up-320x480.png" rel="apple-touch-startup-image"/>
+          <link href="/splashscreens/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+          <link href="/splashscreens/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+          <link href="/splashscreens/iphoneplus_splash.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+          <link href="/splashscreens/iphonex_splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+          <link href="/splashscreens/iphonexr_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+          <link href="/splashscreens/iphonexsmax_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+          <link href="/splashscreens/ipad_splash.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+          <link href="/splashscreens/ipadpro1_splash.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+          <link href="/splashscreens/ipadpro3_splash.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+          <link href="/splashscreens/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
 
-          <link href="path/to/icon.svg" rel="mask-icon" size="any" color="red"/>
+          <link href="/images/icons/icon-192x192.png" rel="icon" sizes="192x192"/>
+          <link href="/images/icons/icon-128x128.png" rel="icon" sizes="128x128"/>
 
-          <link href="icon-192x192.png" rel="icon" sizes="192x192"/>
-          <link href="icon-128x128.png" rel="icon" sizes="128x128"/>
+          <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
 
-          <link href="favicon.icon" rel="shortcut icon" type="image/x-icon"/>
-
-          <link href="images/icon-52x52.png" rel="apple-touch-icon-precomposed" sizes="57x57"/>
-          <link href="images/icon-72x72.png" rel="apple-touch-icon" sizes="72x72"/>
+          <link href="images/apple-icon-57x57.png" rel="apple-touch-icon-precomposed" sizes="57x57"/>
+          <link href="images/apple-icon-72x72.png" rel="apple-touch-icon" sizes="72x72"/>
 
           <link href="/manifest.json" rel="manifest"/>
 
-          <link rel="preconnect" href="https://www.google-analytics.com"/>
           <link rel="preconnect" href="https://www.googletagmanager.com"/>
+          <link rel="preconnect" href="https://www.googletagservices.com"/>
+          <link rel="preconnect" href="https://securepubads.g.doubleclick.net"/>
           <script dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

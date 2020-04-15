@@ -1,7 +1,5 @@
-import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import AdUnit from 'component/ui/AdUnit';
-import { DEVICE_WIDTH } from 'styles/constants';
 
 export default (ren, type='title', lazyLoaded=false) => {
   const parsed = ReactHtmlParser(
@@ -20,6 +18,7 @@ export default (ren, type='title', lazyLoaded=false) => {
       .replace(/<\/blockquote>/g,`</blockquote></div>`)
       .replace(/<a href="https:\/\/www.elnacional.com/g, '<a href="')
       .replace(/style="color: rgb(0, 204, 255);"/g, '')
+      .replace(/style="color:#00ccff"/g, '')
   );
   
   if(type==='title') return parsed;

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import SlidingMenu from 'component/ui/SlidingMenu';
 import HamburgerMenu from 'react-hamburger-menu';
-import { logoSize } from 'images';
 import { HEADER_HEIGHT, SPACING, BORDER_STYLE } from 'styles/constants';
+
+
 
 const styles = {
   header:{
@@ -36,8 +37,8 @@ export default function (){
         <HamburgerMenu isOpen={opened} menuClicked={() => setOpened(!opened)} />
       </div>
       <div style={styles.header_logo}>
-        <a href="/home">
-          <img src={logoSize()} height={HEADER_HEIGHT} alt="Logo El Nacional Venezuela"/>
+        <a href="/">
+          <img src="/logo_en.png" srcSet="/logo_en@2x.png" height={HEADER_HEIGHT} alt="Logo El Nacional Venezuela"/>
         </a>
       </div>
       <div style={styles.header_extras}></div>

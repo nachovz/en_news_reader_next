@@ -52,10 +52,10 @@ const PostView = ({ post, cat }) => {
   );
 }
 
-PostView.getInitialProps = async function({ query: {  slug, cat } }) {
+export async function getServerSideProps({ query: {  slug, cat } }) {
   client.param(globalParamsPost);
   const post = await client.posts().slug(slug);
-  return { post, cat };
+  return { props: { post: (post || null), cat }};
 };
 
 export default PostView;

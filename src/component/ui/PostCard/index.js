@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SkeletonImage } from 'component/ui/Skeleton';
+import SkeletonImage from 'component/ui/SkeletonImage';
 import tagCleaner from 'utils/tagCleaner';
 import { urlCleaner } from 'utils/urlUtil';
 import getBestImage from 'utils/images/getBestImage';

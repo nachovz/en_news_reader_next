@@ -5,6 +5,7 @@ import tagCleaner from 'utils/tagCleaner';
 import { NextSeo } from 'next-seo';
 import { TEXT_SPACING, COLORS, PLACEHOLDER_IMAGE } from 'styles/constants';
 import useScript from 'hook/useScript';
+import yoastProcess from 'utils/yoastProcess';
 
 const styles = {
   article:{
@@ -32,13 +33,6 @@ const styles = {
       marginTop: TEXT_SPACING,
       lineHeight:'1.5em' 
   }
-};
-
-const yoastProcess = (yoast_meta) =>{
-  return yoast_meta.reduce( ( final, meta) => {
-    final[(meta.name || meta.property || 'key')] = (meta.content || 'value');
-    return final;
-  }, {} );
 };
 
 const getDates = (date_gmt) =>{
@@ -129,7 +123,7 @@ export default ({
           <span>{`${da} de ${mo.charAt(0).toUpperCase() + mo.slice(1)} ${ye}`}</span>
         </>
       </div>
-      {!!_embedded && _embedded["wp:featuredmedia"] && 
+      {!!_embedded && _embedded["wp:featuredmedia"] && _embedded["wp:featuredmedia"].title &&
         <figure style={styles.figure}> 
             {!!client &&
               <img 

@@ -17,10 +17,10 @@ const styles = {
     padding: TEXT_SPACING
   },
   hide: {
-    transform: 'translate3d(-100vw, 0, 0)',
+    transform: 'translateX(-100vw)',
   },
   show: {
-    transform: 'translate3d(0vw, 0, 0)',
+    transform: 'translateX(0vw)',
     overflow: 'hidden',
   },
   links: {

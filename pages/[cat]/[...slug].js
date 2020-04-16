@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import Error from 'next/error';
+import dynamic from "next/dynamic";
+//import Error from 'next/error';
 import client from 'utils/client';
 import useInfiniteScroll from 'hook/useInfiniteScroll';
 import Post from 'component/ui/Post';
 import lazyLoadImages from 'utils/images/lazyLoadImages';
+
+const Error = dynamic(import('../_error'));
 
 const globalParamsPost = {
   per_page: 1,
@@ -15,7 +18,7 @@ const PostView = ({ post, cat }) => {
   const [ posts, setPosts] = useState([ post ]);
   const [ isFetching, setIsFetching ] = useInfiniteScroll(fetchMorePosts);
 
-  if (!post || posts.length < 1) return <Error status={404} />;
+  if (!post || posts.length < 1) return <Error statusCode={404} />;
 
   const fetchPost = async () => {
     const newPost = await client.posts().get({

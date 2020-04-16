@@ -10,7 +10,8 @@ import yoastProcess from 'utils/yoastProcess';
 const styles = {
   article:{
       minHeight:'100vh',
-      borderBottom:`${TEXT_SPACING}px solid ${COLORS.primary}`  
+      borderBottom:`${TEXT_SPACING}px solid ${COLORS.primary}`,
+      paddingBottom:  TEXT_SPACING*4
   },
   paddedContent:{
     color: COLORS.text,

@@ -10,18 +10,22 @@ const styles = {
     backgroundColor: COLORS.background,
     position: 'fixed',
     top: HEADER_CALC,
-    left: 0,
-    transition: 'transform .3s cubic-bezier(0, .52, 0, 1)',
-    overflow: 'scroll',
-    zIndex: 1000,
-    padding: TEXT_SPACING
+    left:0,
+    transform: 'translate3d(calc(-1 * 100vw), 0, 0)',
+    '-webkit-transition': '.25s ease-in-out', 
+    '-moz-transition': '.25s ease-in-out',
+    '-o-transition': '.25s ease-in-out', 
+    transition: '.25s ease-in-out',
+    overflowX: 'hidden',
+    overflowY: 'scroll',
+    zIndex: 10000,
+    padding: TEXT_SPACING,
   },
   hide: {
-    transform: 'translateX(-100vw)',
+    transform: 'translate3d(calc(-1 * 100vw), 0, 0)',
   },
   show: {
-    transform: 'translateX(0vw)',
-    overflow: 'hidden',
+    transform: 'translate3d(0, 0, 0)'
   },
   links: {
     color: COLORS.primary,

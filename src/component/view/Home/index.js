@@ -33,7 +33,8 @@ const styles = {
     minHeight: '100vh'
   },
   article_wrapper: {
-    paddingTop: 50
+    paddingTop: 50,
+    minHeight: '90vh'
   }
 };
 

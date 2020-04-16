@@ -8,13 +8,13 @@ import 'normalize.css';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <React.Fragment>
+    <div style={{zIndex: 1, overflowX: 'hidden', position: 'relative', left: 0}}>
       <Header/>
         <div style={{ paddingTop: HEADER_HEIGHT + (SPACING*2) }}>
           <Component {...pageProps} />
         </div>
       <Footer/>
-    </React.Fragment>
+    </div>
   );
 }
 

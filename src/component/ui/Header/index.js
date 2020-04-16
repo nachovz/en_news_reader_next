@@ -3,8 +3,6 @@ import SlidingMenu from 'component/ui/SlidingMenu';
 import HamburgerMenu from 'react-hamburger-menu';
 import { HEADER_HEIGHT, SPACING, BORDER_STYLE } from 'styles/constants';
 
-
-
 const styles = {
   header:{
     display: 'flex',
@@ -32,17 +30,20 @@ export default function (){
   const [opened, setOpened] = useState(false);
 
   return(
-    <div style={styles.header}>
-      <div style={styles.header_extras}>
-        <HamburgerMenu isOpen={opened} menuClicked={() => setOpened(!opened)} />
+    <>
+      <div style={styles.header}>
+        <div style={styles.header_extras}>
+          <HamburgerMenu isOpen={opened} menuClicked={() => setOpened(!opened)} />
+        </div>
+        <div style={styles.header_logo}>
+          <a href="/">
+            <img src="/logo_en.png" srcSet="/logo_en@2x.png" height={HEADER_HEIGHT} alt="Logo El Nacional Venezuela"/>
+          </a>
+        </div>
+        <div style={styles.header_extras}></div>
+        
       </div>
-      <div style={styles.header_logo}>
-        <a href="/">
-          <img src="/logo_en.png" srcSet="/logo_en@2x.png" height={HEADER_HEIGHT} alt="Logo El Nacional Venezuela"/>
-        </a>
-      </div>
-      <div style={styles.header_extras}></div>
       <SlidingMenu opened={opened} handleMouseDown={() => setOpened(false)}/>
-    </div>
+    </>
   )
 }

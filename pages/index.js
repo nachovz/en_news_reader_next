@@ -20,10 +20,16 @@ export async function getServerSideProps(){
     _fields: 'title,excerpt,link,date_gmt,featured_media,_links,slug',
     _embed: 1,
   });
+  const portada = await client.posts().get({
+    per_page: 1,
+    ...parseFilter(['principal-portada']),
+    _fields: 'title,excerpt,link,date_gmt,featured_media,_links,slug',
+    _embed: 1,
+  });
   const yoastFetch = await fetch('https://www.elnacional.com/wp-json/wp-rest-yoast-meta/v1/home');
   const yoast = await yoastFetch.json();
 
-  return { props: { posts, yoast }};
+  return { props: { posts:[...portada,...posts], yoast }};
 };
 
 export default HomePage;

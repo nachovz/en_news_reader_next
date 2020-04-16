@@ -131,7 +131,7 @@ const Home = ({
           &nbsp;
         </div>
       }
-      <div style={styles.article_wrapper}>
+      <div style={{...(!noMenu ? styles.article_wrapper:{})}}>
         {state.posts.length > 0 ? state.posts.map((post, ind) => {
           return(
             <React.Fragment key={ind}>

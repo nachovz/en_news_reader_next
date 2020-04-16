@@ -2,7 +2,7 @@
   "name": "El Nacional",
   "short_name": "EN",
   "theme_color": "#001689",
-  "background_color": "#001689",
+  "background_color": "white",
   "display": "standalone",
   "orientation": "portrait",
   "Scope": "/",

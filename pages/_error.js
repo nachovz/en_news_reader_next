@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import dynamic from "next/dynamic";
 import client from 'utils/client';
-import Home from 'component/view/Home';
+//import Home from 'component/view/Home';
 import { COLORS, TEXT_SPACING } from 'styles/constants';
 import parseFilter from 'utils/parseFilter'; 
 import { routes } from 'data/constants';
+
+const Home = dynamic(() => import('component/view/Home'), { ssr: false });
 
 const styles = {
   link:{
@@ -17,7 +20,7 @@ const styles = {
   }
 }
 
-const fetchPosts = async (page=0, filter=[]) => {
+const fetchPosts = async (page=0) => {
   const posts = await client.posts().get({
     per_page: 10,
     offset: page,
@@ -28,15 +31,16 @@ const fetchPosts = async (page=0, filter=[]) => {
   return posts;
 };
 
-function CustomError({ statusCode }) {
+function CustomError() {
+  const statusCode=404;
   const [ posts, setPosts ] = useState([]);
 
   useEffect(()=>{
-    /*fetchPosts().then((posts)=>{
+    fetchPosts().then((posts)=>{
       setPosts(posts);
-    });*/
+    });
     console.log('called');
-  });
+  }, []);
 
   let title = '';
   switch(statusCode){
@@ -66,7 +70,7 @@ function CustomError({ statusCode }) {
   );
 }
 
-function getInitialProps({ res, err }) {
+/*function getInitialProps({ res, err }) {
   let statusCode;
   // If the res variable is defined it means nextjs
   // is in server side
@@ -84,6 +88,6 @@ function getInitialProps({ res, err }) {
   return { statusCode };
 }
 
-CustomError.getInitialProps = getInitialProps;
+CustomError.getInitialProps = getInitialProps;*/
 
 export default CustomError;

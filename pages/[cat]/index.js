@@ -17,7 +17,7 @@ const HomePage = (props) => {
 
 export async function getServerSideProps( { query: { cat } } ) {
   const posts = !routes[cat] ? null : await client.posts().get({
-    per_page: 20,
+    per_page: 12,
     ...parseFilter([routes[cat].value]),
     _fields: 'title,excerpt,link,date_gmt,featured_media,_links,slug',
     _embed: 1,

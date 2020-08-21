@@ -6,7 +6,7 @@ import { HEADER_HEIGHT, SPACING, BORDER_STYLE } from 'styles/constants';
 const styles = {
   header:{
     display: 'flex',
-    width: '100vw',
+    width: `calc(100vw - ${SPACING*2}px)`,
     height: HEADER_HEIGHT,
     position: 'fixed',
     zIndex: '1000',
@@ -26,14 +26,20 @@ const styles = {
   }
 }
 
-export default function (){
+const Header = () => {
   const [opened, setOpened] = useState(false);
 
   return(
     <>
       <div style={styles.header}>
         <div style={styles.header_extras}>
-          <HamburgerMenu isOpen={opened} menuClicked={() => setOpened(!opened)} />
+          <HamburgerMenu 
+						isOpen={opened} 
+						menuClicked={() => setOpened(!opened)} 
+						width={25}
+						height={20}
+						strokeWidth={2}
+					/>
         </div>
         <div style={styles.header_logo}>
           <a href="/">
@@ -47,3 +53,5 @@ export default function (){
     </>
   )
 }
+
+export default Header;

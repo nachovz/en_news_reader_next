@@ -49,7 +49,7 @@ const getDates = (date_gmt) =>{
   return { ye, mo, da};
 }
 
-export default ({ 
+const Post = ({ 
   title, 
   content, 
   _embedded, 
@@ -143,3 +143,5 @@ export default ({
     </article>
   );
 }
+
+export default Post;

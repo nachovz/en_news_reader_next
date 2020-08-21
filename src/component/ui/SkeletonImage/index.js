@@ -6,8 +6,10 @@ const styles = {
   }
 };
 
-export default function(){
+const SkeletonImage = () => {
   return(
     <div className="skeleton_element" style={styles.skeleton_image}></div>
   )
 };
+
+export default SkeletonImage;

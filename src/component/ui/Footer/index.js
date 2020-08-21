@@ -13,10 +13,11 @@ const styles={
     }
 }
 
-export default () => (
+const Footer = () => (
     <div style={styles.footer}>
         <span>
          © EL NACIONAL WEB - CARACAS-VENEZUELA 2014 © C.A. IBERONEWS LIMITED. TODOS LOS DERECHOS RESERVADOS RIF J-402838298.PROHIBIDA LA REPRODUCCIÓN TOTAL O PARCIAL DE CUALQUIER MATERIAL DE ESTE DIARIO SIN LA AUTORIZACIÓN EXPRESA DE LOS EDITORES 
         </span>
     </div>
 )
+export default Footer;

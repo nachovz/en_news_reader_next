@@ -7,8 +7,7 @@ const styles={
   unit_container: {
     width: '100%',
     textAlign: 'center',
-    margin: `${TEXT_SPACING}px 0 ${TEXT_SPACING}px 0`,
-    padding: `${TEXT_SPACING}px 0 ${TEXT_SPACING*2}px`,
+    padding: `0 0 ${TEXT_SPACING+10}px`,
     background: COLORS.background_dark
   },
   unit_block:{
@@ -23,13 +22,15 @@ const styles={
     height: 50,
   },
   unit_default_text:{
-    lineHeight: '35px',
-    fontStyle: 'italic',
-    color: COLORS.text_light
+    lineHeight: `${TEXT_SPACING+10}px`,
+		fontSize: '11px',
+    color: COLORS.text_light,
+    textTransform: 'uppercase',
+		letterSpacing: '0.5px'
   }
 }
 
-export default function({ type=AD_BOX }) {
+const AdUnit = ({ type=AD_BOX }) => {
   return(
     <div style={styles.unit_container}>
       <span style={styles.unit_default_text}>Publicidad</span>
@@ -44,3 +45,5 @@ export default function({ type=AD_BOX }) {
     </div>
   );
 }
+
+export default AdUnit;

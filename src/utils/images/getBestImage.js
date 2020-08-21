@@ -1,5 +1,5 @@
 import { DEVICE_WIDTH, IS_RETINA } from 'styles/constants';
-export default (media_details) => {
+const getBestImage = (media_details) => {
   let images = [];
   Object.keys(media_details).forEach( sizeName => {
     if (IS_RETINA && sizeName.indexOf('_retina') >= 1){
@@ -12,3 +12,5 @@ export default (media_details) => {
   
   return images.sort((a, b) => b.width - a.width)[0].source_url || "";
 }
+
+export default getBestImage;

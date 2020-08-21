@@ -1,4 +1,4 @@
-export default (date=(new Date())) => {
+const dateAgoToText = (date=(new Date())) => {
     var seconds = Math.floor(( new Date(Date.now()) - date ) / 1000);
     var interval = Math.floor(seconds / 31536000);
     interval = Math.floor(seconds / 86400);
@@ -15,3 +15,5 @@ export default (date=(new Date())) => {
     }
     return "hace " + Math.floor(seconds) + " segundos";
   }
+
+	export default dateAgoToText;

@@ -15,7 +15,7 @@ const HomePage = (props) => {
 
 export async function getServerSideProps(){
   const posts = await client.posts().get({
-    per_page: 20,
+    per_page: 11,
     ...parseFilter([routes['home'].value]),
     _fields: 'title,excerpt,link,date_gmt,featured_media,_links,slug',
     _embed: 1,

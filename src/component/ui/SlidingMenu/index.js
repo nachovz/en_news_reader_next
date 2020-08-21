@@ -31,11 +31,12 @@ const styles = {
     color: COLORS.primary,
     marginLeft: 15,
     textDecoration: 'none',
-    textTransform: 'uppercase'
+    textTransform: 'uppercase',
+		letterSpacing: '0'
   }
 };
 
-export default function({opened, handleMouseDown}){
+const SlidingMenu = ({opened, handleMouseDown}) => {
   return(
     <div
       onMouseDown={handleMouseDown}
@@ -48,3 +49,5 @@ export default function({opened, handleMouseDown}){
     </div>
   )
 }
+
+export default SlidingMenu;

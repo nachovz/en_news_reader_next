@@ -12,7 +12,7 @@ const styles = {
   }
 };
 
-export default function({ full=false }){
+const Skeleton = ({ full=false }) => {
   return(
     <div style={{minHeight: '50vh'}}>
       {!!full && 
@@ -31,3 +31,5 @@ export default function({ full=false }){
     </div>
   )
 };
+
+export default Skeleton;

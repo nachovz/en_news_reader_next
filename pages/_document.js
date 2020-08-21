@@ -21,7 +21,7 @@ class MyDocument extends Document {
           <meta name='format-detection' content='telephone=no' />
           <meta name='mobile-web-app-capable' content='yes' />
           <meta name='theme-color' content='#001689' />
-          <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover' />
+          
           
           <link rel='apple-touch-icon' sizes='180x180' href='/images/icons/apple-touch-icon.png' />
           <link rel='manifest' href='/manifest.json' />

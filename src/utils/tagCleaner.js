@@ -1,7 +1,7 @@
 import ReactHtmlParser from 'react-html-parser';
 import AdUnit from 'component/ui/AdUnit';
 
-export default (ren, type='title', lazyLoaded=false) => {
+const tagCleaner = (ren, type='title', lazyLoaded=false) => {
   const parsed = ReactHtmlParser(
     ren.replace(/style="text-align: justify;"/g, '')
       .replace(/&#171;/g, '“<em>')
@@ -51,3 +51,5 @@ export default (ren, type='title', lazyLoaded=false) => {
 
   return withAds;
 }
+
+export default tagCleaner;

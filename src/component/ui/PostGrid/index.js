@@ -3,11 +3,13 @@ import SkeletonImage from 'component/ui/SkeletonImage';
 import tagCleaner from 'utils/tagCleaner';
 import { urlCleaner } from 'utils/urlUtil';
 import getBestImage from 'utils/images/getBestImage';
-import { TEXT_SPACING, SPACING, BORDER_STYLE, COLORS, PLACEHOLDER_IMAGE } from 'styles/constants';
+import dateAgoToText from 'utils/dateAgoToText';
+import { TEXT_SPACING, SPACING, BORDER_STYLE, COLORS, DEVICE_WIDTH, PLACEHOLDER_IMAGE } from 'styles/constants';
 
 const styles = {
   post_container:{
     background: 'white',
+		display: 'flex',
 		padding: `${TEXT_SPACING}px ${TEXT_SPACING}px 0`,
   },
   image_container:{
@@ -15,13 +17,13 @@ const styles = {
     background: 'rgb(194, 200, 200)',
     height: 250
   },
-  bottom_separator:{
+  content_container:{
     borderBottom: BORDER_STYLE,
 		paddingBottom:  `${TEXT_SPACING}px`,
   },
   title_smaller:{
-    fontSize: '1.3em',
-		fontWeight: 'bold'
+    fontSize: '1.1em',
+		fontWeight: 'bold',
   },
   date_container:{
     width: '100%',
@@ -29,7 +31,7 @@ const styles = {
     fontStyle: 'italic',
     color: COLORS.text_light,
     paddingBottom: SPACING,
-    borderBottom: BORDER_STYLE
+    
   },
   margin_bottom:{
     marginBottom: SPACING*2
@@ -41,27 +43,15 @@ const PostCard = ({
   _embedded, 
   link, 
   excerpt, 
-  date_gmt,
-	noImage=false, 
+  date_gmt, 
+  noImage=false, 
   margin=false
 }) => {
   const [ client, setClient ] = useState(typeof window !== 'undefined');
 
   return(
     <article style={styles.post_container}>
-      <div style={{ ...margin ? styles.margin_bottom : {}}}>
-        {!!link && !!title && !!excerpt && !!date_gmt && 
-          <React.Fragment>
-            <a href={urlCleaner(link)}>
-              <h2 style={styles.title_smaller}>
-                {tagCleaner(title.rendered)}
-              </h2>
-              <div>{tagCleaner(excerpt.rendered)}</div>
-            </a>
-          </React.Fragment>
-        }
-      </div>
-			{!noImage && !!_embedded && !!_embedded["wp:featuredmedia"] && !!_embedded["wp:featuredmedia"]["0"] && !!_embedded["wp:featuredmedia"]["0"].media_details && !!link &&
+      {false && !!_embedded && !noImage && !!_embedded["wp:featuredmedia"] && !!_embedded["wp:featuredmedia"]["0"] && !!_embedded["wp:featuredmedia"]["0"].media_details && !!link &&
         <figure>
           <a href={urlCleaner(link)}>
             {!!client ?
@@ -81,7 +71,19 @@ const PostCard = ({
           </a>
         </figure>
       }
-			<div style={styles.bottom_separator}></div>
+      <div style={{...styles.content_container, ...margin ? styles.margin_bottom : {}}}>
+        {!!link && !!title && !!excerpt && !!date_gmt && 
+          <React.Fragment>
+            <a href={urlCleaner(link)}>
+              <h2 style={styles.title_smaller}>
+                {tagCleaner(title.rendered)}
+              </h2>
+              
+            </a>
+            
+          </React.Fragment>
+        }
+      </div>
     </article>
   )
 }

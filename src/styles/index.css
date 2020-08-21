@@ -102,16 +102,18 @@ em {
 figure{
   background: rgb(255, 255, 255);
   overflow: hidden;
-  min-height: 250px;
+  min-height: 214px;
 }
 figure img{
   max-width:100%;
   height: auto;
 }
 figure figcaption{
-  padding: 8px 20px;
-  font-style:italic;
-  color:#505050;
+  padding: 0;
+  color:#CCCCCC;
+	text-align: right;
+	font-size: 13px;
+	letter-spacing: 0.2px;
 }
 main p, .wrapped-content, main ol, main ul {
   color: #060606; 

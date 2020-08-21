@@ -5,6 +5,7 @@ import client from 'utils/client';
 import { NextSeo } from 'next-seo';
 import useInfiniteScroll from 'hook/useInfiniteScroll';
 import PostCard from 'component/ui/PostCard';
+import PostGrid from 'component/ui/PostGrid';
 import AdUnit from 'component/ui/AdUnit';
 import lazyLoadImages from 'utils/images/lazyLoadImages';
 import parseFilter from 'utils/parseFilter';
@@ -65,7 +66,7 @@ const Home = ({
   const horizontalNav = useRef(null);
   const { yoast_title, yoast_meta, yoast_json_ld } = yoast || { yoast_title:'', yoast_meta:[], yoast_json_ld:{} };
   const parsed_yoast_meta = yoastProcess(yoast_meta);
-  
+  console.log(state);
 
   useEffect(() => {
     lazyLoadImages();
@@ -133,16 +134,18 @@ const Home = ({
         </div>
       }
       <div style={{...(!noMenu ? styles.article_wrapper:{})}}>
-        {state.posts.length > 0 ? state.posts.map((post, ind) => {
+        {state.posts.length > 0 ? [0, 1, 2].map((ind) => {
+					//const itr = ind > 2 ? ind - 3: ind;
+					//console.log(state.posts[4*ind], (state.posts[(4*ind)+1]), state.posts[(4*ind)+2], state.posts[(4*ind)+3]);
           return(
             <React.Fragment key={ind}>
-              <PostCard noImage={ind % 3} margin={(ind+1) % 3 === 0} {...post} />
-              {(ind+1) % 3 === 0 &&
-                <AdUnit 
-                  type={ind % 2 === 0 ? AD_BOX: AD_BANNER }
-                  unitId={`gtp-en-${ind}`}
-                />
-              }
+							<PostCard noImage={ind > 1} {...state.posts[4*ind]} />
+							<PostGrid {...state.posts[(4*ind)+1]}/>
+							<PostGrid {...state.posts[(4*ind)+2]}/>
+							<AdUnit 
+								type={ind % 6 === 0 ? AD_BANNER : AD_BOX }
+								unitId={`gtp-en-${ind}`}
+							/>
             </React.Fragment>
           )
         })

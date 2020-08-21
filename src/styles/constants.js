@@ -1,5 +1,5 @@
-export const HEADER_HEIGHT = 51;
-export const HEADER_CALC = 67;
+export const HEADER_HEIGHT = 36;
+export const HEADER_CALC = 53;
 export const SPACING = 8;
 export const TEXT_SPACING = 20;
 export const DEVICE_WIDTH = typeof window !== 'undefined' ? document.documentElement.clientWidth: 300;

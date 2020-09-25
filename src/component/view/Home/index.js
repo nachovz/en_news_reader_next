@@ -66,7 +66,7 @@ const Home = ({
   const horizontalNav = useRef(null);
   const { yoast_title, yoast_meta, yoast_json_ld } = yoast || { yoast_title:'', yoast_meta:[], yoast_json_ld:{} };
   const parsed_yoast_meta = yoastProcess(yoast_meta);
-  console.log(state);
+  //console.log(state);
 
   useEffect(() => {
     lazyLoadImages();

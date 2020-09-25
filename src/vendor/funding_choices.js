@@ -1,82 +1,4 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document'
-
-const APP_NAME = 'El Nacional'
-const APP_DESCRIPTION = 'EL NACIONAL ¿Qué pasa en Venezuela? Noticias y contenido de primera. Política, sucesos, entretenimiento, opinión, deportes, economía y mucho más'
-
-class MyDocument extends Document {
-  static async getInitialProps(ctx) {
-    return await Document.getInitialProps(ctx)
-  }
-
-  render() {
-    return (
-      <Html lang="es">
-        <Head>
-          <meta charset="utf-8"/>
-          <meta name='application-name' content={APP_NAME} />
-          <meta name='apple-mobile-web-app-capable' content='yes' />
-          <meta name='apple-mobile-web-app-status-bar-style' content='default' />
-          <meta name='apple-mobile-web-app-title' content={APP_NAME} />
-          <meta name='description' content={APP_DESCRIPTION} />
-          <meta name='format-detection' content='telephone=no' />
-          <meta name='mobile-web-app-capable' content='yes' />
-          <meta name='theme-color' content='#001689' />
-          
-          
-          <link rel='apple-touch-icon' sizes='180x180' href='/images/icons/apple-touch-icon.png' />
-          <link rel='manifest' href='/manifest.json' />
-          <link rel='shortcut icon' href='/favicon.ico' />
-          <style>{
-            `
-            html, body, #__next {
-              height: 100%;
-            }
-            #__next {
-              margin: 0 auto;
-            }
-            `
-          }</style>
-          <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-          <meta name="mobile-web-app-capable" content="yes"/>
-
-          <meta name="msapplication-navbutton-color" content="#001689"/>
-          <meta name="msapplication-TileColor" content="#001689"/>
-          <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png"/>
-          <meta name="msapplication-config" content="browserconfig.xml"/>
-
-          <meta name="msapplication-tooltip" content="Noticias sobre Venezuela y el Mundo"/>
-          <meta name="msapplication-starturl" content="/"/>
-
-          <meta name="msapplication-tap-highlight" content="no"/>
-
-          <meta name="full-screen" content="yes"/>
-          <meta name="browsermode" content="application"/>
-
-          <meta name="screen-orientation" content="portrait"/>
-
-          <link href="/images/favicon-16.png" rel="icon" type="image/png" sizes="16x16"/>
-          <link href="/images/favicon-32.png" rel="icon" type="image/png" sizes="32x32"/>
-          <link href="/images/favicon-96.png" rel="icon" type="image/png" sizes="96x96"/>
-
-          <link href="/images/apple-icon-57x57.png" rel="apple-touch-icon"/>
-          <link href="/images/apple-icon-76x76.png" rel="apple-touch-icon" sizes="76x76"/>
-          <link href="/images/apple-icon-120x120.png" rel="apple-touch-icon" sizes="120x120"/>
-          <link href="/images/apple-icon-152x152.png" rel="apple-touch-icon" sizes="152x152"/>
-
-          <link href="/images/icons/icon-192x192.png" rel="icon" sizes="192x192"/>
-          <link href="/images/icons/icon-128x128.png" rel="icon" sizes="128x128"/>
-
-          <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-
-          <link href="/images/apple-icon-57x57.png" rel="apple-touch-icon-precomposed" sizes="57x57"/>
-          <link href="/images/apple-icon-72x72.png" rel="apple-touch-icon" sizes="72x72"/>
-
-          <script async src="https://cdn.jsdelivr.net/npm/pwacompat@2.0.10/pwacompat.min.js"
-          integrity="sha384-I1iiXcTSM6j2xczpDckV+qhhbqiip6FyD6R5CpuqNaWXvyDUvXN5ZhIiyLQ7uuTh"
-          crossorigin="anonymous"></script>
-
-					{typeof window === 'undefined' && <script dangerouslySetInnerHTML={{
-            __html: `(function(){/*
+(function(){/*
 
  Copyright The Closure Library Authors.
  SPDX-License-Identifier: Apache-2.0
@@ -92,34 +14,31 @@ M.prototype.h=N?function(){var a=Uint8Array.prototype.toJSON;Uint8Array.prototyp
 var ma=function(){var a=function(){if(!l.frames.googlefcPresent)if(document.body){var b=document.createElement("iframe");b.style.display="none";b.style.width="0px";b.style.height="0px";b.style.border="none";b.style.zIndex="-1000";b.style.left="-1000px";b.style.top="-1000px";b.name="googlefcPresent";document.body.appendChild(b)}else l.setTimeout(a,5)};a()},na=function(a){var b=Date.now();W(a.b,"internal_api_load_with_sb",a.f.h(),function(){var c;var d=a.b,e=l[l.btoa(d+"loader_js")];if(e){e=l.atob(e);
 e=parseInt(e,10);d=l.btoa(d+"loader_js").split(".");var f=l;d[0]in f||"undefined"==typeof f.execScript||f.execScript("var "+d[0]);for(;d.length&&(c=d.shift());)d.length?f[c]&&f[c]!==Object.prototype[c]?f=f[c]:f=f[c]={}:f[c]=null;c=Math.abs(b-e);c=1728E5>c?0:c}else c=-1;0!=c&&(W(a.b,"internal_api_sb"),Z(a,Q(a.a,6)))},function(c){Z(a,c?Q(a.a,4):Q(a.a,5))})},Z=function(a,b){a.c||(a.c=!0,a=new l.XMLHttpRequest,a.open("GET",b,!0),a.send())};(function(a,b){l[a]=function(c){for(var d=[],e=0;e<arguments.length;++e)d[e-0]=arguments[e];l[a]=q;b.apply(null,d)}})("__d3lUW8vwsKlB__",function(a){"function"==typeof window.atob&&(a=window.atob(a),a=new X(a?JSON.parse(a):null),(new Y(a)).start())});}).call(this);
 
-window.__d3lUW8vwsKlB__("WyI5YmQ3YmIzYTU5ZTkyOTZiIixbbnVsbCxudWxsLG51bGwsImh0dHBzOi8vZnVuZGluZ2Nob2ljZXNtZXNzYWdlcy5nb29nbGUuY29tL2YvQUdTS1d4WFFSVzNzX29XT2hLYi1aN1hyazhyT3AtX0xkVENOU2FyZUpqSE9FVU8wVGRHSUN1VW1WLTdrRFQ1MlhxaDVQLTV5UzZUSDc3QTRSRmh4ZXliYlF0b1x1MDAzZCJdCixbMjAsImRpdi1ncHQtYWQiLDEwMCwiT1dKa04ySmlNMkUxT1dVNU1qazJZZ1x1MDAzZFx1MDAzZCIsW251bGwsbnVsbCxudWxsLCJodHRwczovL3d3dy5nc3RhdGljLmNvbS8wZW1uL2YvcC85YmQ3YmIzYTU5ZTkyOTZiLmpzP3VzcXBcdTAwM2RDQkEiXQpdCiwiaHR0cHM6Ly9mdW5kaW5nY2hvaWNlc21lc3NhZ2VzLmdvb2dsZS5jb20vbC9BR1NLV3hWdXlwbXdNankwMVZqdTNWNHhObnVjMHpIZ25JSUQtN3gzcFZjdUtCbjRkNFFXWi1yekp5X0J5WUg3Vm5zSlRkSjlhdFA2X3Vpc01FdXh6bkRlP2FiXHUwMDNkMSIsImh0dHBzOi8vZnVuZGluZ2Nob2ljZXNtZXNzYWdlcy5nb29nbGUuY29tL2wvQUdTS1d4VmVTTDl0ZGRCTlA0RzdYZkU2UGVNNHlQcWpDcTdUc2I5aXc3RzZ3M0xweGlHaDlrS2NFZ1llVnFVTkNTZEQzNTFPRTRpX3pVWmN4M1VLWHNtZT9hYlx1MDAzZDJcdTAwMjZzYmZcdTAwM2QxIiwiaHR0cHM6Ly9mdW5kaW5nY2hvaWNlc21lc3NhZ2VzLmdvb2dsZS5jb20vbC9BR1NLV3hYVF83aTNOVGlldGJjVHVVRzlTSUNPMG1mTi1NZ0lRLVBBMzl5M2d3NW5icTh2WlAzWlZBS0YwbHd4ZWx1V3NqWXBJUmlheEYzeEM4SnJPU0VUP3NiZlx1MDAzZDIiXQo=");`,
-          }}></script>}
-					<link rel="preconnect" href="https://www.googletagmanager.com"/>
-          <link rel="preconnect" href="https://www.googletagservices.com"/>
-          <script dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-          })(window,document,'script','dataLayer','GTM-PV6WLCJ');`,
-          }}>
-          </script>
-          <link rel="preconnect" href="https://googleads.g.doubleclick.net"/>  
-          <link rel="dns-prefetch" href="https://static.doubleclick.net"/> 
-          <link rel="preconnect" href="https://fonts.googleapis.com"/>
-          <script async="async" src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>   
-        </Head>
-        <body>
-          <noscript dangerouslySetInnerHTML={{
-            __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PV6WLCJ"
-          height="0" width="0" style="display:none;visibility:hidden"></iframe>`}}></noscript>
-          <Main />
-          <NextScript />
-          
-        </body>
-      </Html>
-    )
-  }
-}
+window.__d3lUW8vwsKlB__("WyI5YmQ3YmIzYTU5ZTkyOTZiIixbbnVsbCxudWxsLG51bGwsImh0dHBzOi8vZnVuZGluZ2Nob2ljZXNtZXNzYWdlcy5nb29nbGUuY29tL2YvQUdTS1d4WFFSVzNzX29XT2hLYi1aN1hyazhyT3AtX0xkVENOU2FyZUpqSE9FVU8wVGRHSUN1VW1WLTdrRFQ1MlhxaDVQLTV5UzZUSDc3QTRSRmh4ZXliYlF0b1x1MDAzZCJdCixbMjAsImRpdi1ncHQtYWQiLDEwMCwiT1dKa04ySmlNMkUxT1dVNU1qazJZZ1x1MDAzZFx1MDAzZCIsW251bGwsbnVsbCxudWxsLCJodHRwczovL3d3dy5nc3RhdGljLmNvbS8wZW1uL2YvcC85YmQ3YmIzYTU5ZTkyOTZiLmpzP3VzcXBcdTAwM2RDQkEiXQpdCiwiaHR0cHM6Ly9mdW5kaW5nY2hvaWNlc21lc3NhZ2VzLmdvb2dsZS5jb20vbC9BR1NLV3hWdXlwbXdNankwMVZqdTNWNHhObnVjMHpIZ25JSUQtN3gzcFZjdUtCbjRkNFFXWi1yekp5X0J5WUg3Vm5zSlRkSjlhdFA2X3Vpc01FdXh6bkRlP2FiXHUwMDNkMSIsImh0dHBzOi8vZnVuZGluZ2Nob2ljZXNtZXNzYWdlcy5nb29nbGUuY29tL2wvQUdTS1d4VmVTTDl0ZGRCTlA0RzdYZkU2UGVNNHlQcWpDcTdUc2I5aXc3RzZ3M0xweGlHaDlrS2NFZ1llVnFVTkNTZEQzNTFPRTRpX3pVWmN4M1VLWHNtZT9hYlx1MDAzZDJcdTAwMjZzYmZcdTAwM2QxIiwiaHR0cHM6Ly9mdW5kaW5nY2hvaWNlc21lc3NhZ2VzLmdvb2dsZS5jb20vbC9BR1NLV3hYVF83aTNOVGlldGJjVHVVRzlTSUNPMG1mTi1NZ0lRLVBBMzl5M2d3NW5icTh2WlAzWlZBS0YwbHd4ZWx1V3NqWXBJUmlheEYzeEM4SnJPU0VUP3NiZlx1MDAzZDIiXQo=")
 
-export default MyDocument
+// Make sure that the properties exist on the window.
+  window.googlefc = window.googlefc || {};
+  window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+
+  // Queue the callback on the callbackQueue.
+  googlefc.callbackQueue.push({
+    'AD_BLOCK_DATA_READY':
+    function() {
+      switch (googlefc.getAllowAdsStatus()) {
+        case googlefc.AllowAdsStatusEnum.ADS_NOT_ALLOWED:
+          // Insert handling for cases where the user has not allowed ads.
+          // The user may have never been an ad blocker.
+					console.log("never adblocked")
+          break;
+        case googlefc.AllowAdsStatusEnum.ADS_ALLOWED:
+          // Insert handling for cases where the user saw the ad blocking
+          // message and allowed ads on the site.
+					console.log("saw allowed")
+          break;
+        case googlefc.AllowAdsStatusEnum.UNKNOWN:
+          // Insert handling for unknown cases.
+					console.log("unknown")
+          break;
+      }
+    }
+  });

@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import Head from 'next/head';
 import Header from 'component/ui/Header';
 import Footer from 'component/ui/Footer';
 import { HEADER_HEIGHT, SPACING } from 'styles/constants';
 import 'styles/index.css';
 import 'normalize.css';
-import Head from 'next/head';
 
 
 function MyApp({ Component, pageProps }) {
+	/*useEffect(() => {
+		if (typeof window === 'undefined') {
+			require('vendor/funding_choices.js')
+		}
+	}, [])*/
+
   return (
 		<>
 			<Head>

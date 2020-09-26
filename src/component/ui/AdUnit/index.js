@@ -7,19 +7,18 @@ const styles={
   unit_container: {
     width: '100%',
     textAlign: 'center',
-    padding: `0 0 ${TEXT_SPACING+10}px`,
-    background: COLORS.background_dark
+    padding: `0 0 ${TEXT_SPACING}px`,
+    background: COLORS.background_dark,
+		margin: `${TEXT_SPACING/2}px 0`
   },
   unit_block:{
     margin: '0 auto',
   },
   [AD_BOX]:{
-    width: 300,
-    height: 250,
+    height: 290,
   },
   [AD_BANNER]:{
-    width: 320,
-    height: 50,
+    height: 80,
   },
   unit_default_text:{
     lineHeight: `${TEXT_SPACING+10}px`,
@@ -32,7 +31,7 @@ const styles={
 
 const AdUnit = ({ type=AD_BOX }) => {
   return(
-    <div style={styles.unit_container}>
+    <div style={{...styles.unit_container,...styles[type]}}>
       <span style={styles.unit_default_text}>Publicidad</span>
       <div style={{...styles.unit_block}}>
       {typeof window !== 'undefined' &&

@@ -3,17 +3,13 @@ import Head from 'next/head';
 import Header from 'component/ui/Header';
 import Footer from 'component/ui/Footer';
 import { HEADER_HEIGHT, SPACING } from 'styles/constants';
+import ScrollToTop from 'component/ui/ScrollToTop'
 import 'styles/index.css';
 import 'normalize.css';
 
 
 function MyApp({ Component, pageProps }) {
-	/*useEffect(() => {
-		if (typeof window === 'undefined') {
-			require('vendor/funding_choices.js')
-		}
-	}, [])*/
-
+	
   return (
 		<>
 			<Head>
@@ -22,6 +18,7 @@ function MyApp({ Component, pageProps }) {
 			<div style={{zIndex: 1, overflowX: 'hidden', position: 'relative', left: 0}}>
 				<Header/>
 					<div style={{ paddingTop: HEADER_HEIGHT + (SPACING*2) }}>
+						<ScrollToTop />
 						<Component {...pageProps} />
 					</div>
 				<Footer/>

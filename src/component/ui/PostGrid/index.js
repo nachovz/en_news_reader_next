@@ -4,13 +4,13 @@ import tagCleaner from 'utils/tagCleaner';
 import { urlCleaner } from 'utils/urlUtil';
 import getBestImage from 'utils/images/getBestImage';
 import dateAgoToText from 'utils/dateAgoToText';
-import { TEXT_SPACING, SPACING, BORDER_STYLE, COLORS, DEVICE_WIDTH, PLACEHOLDER_IMAGE } from 'styles/constants';
+import { TEXT_SPACING, SPACING, BORDER_STYLE, COLORS } from 'styles/constants';
 
 const styles = {
   post_container:{
     background: 'white',
 		display: 'flex',
-		padding: `${TEXT_SPACING}px ${TEXT_SPACING}px 0`,
+		padding: `${TEXT_SPACING}px ${TEXT_SPACING}px 0`
   },
   image_container:{
     display: 'flex',
@@ -20,6 +20,7 @@ const styles = {
   content_container:{
     borderBottom: BORDER_STYLE,
 		paddingBottom:  `${TEXT_SPACING}px`,
+		width: '100%'
   },
   title_smaller:{
     fontSize: '1.1em',
@@ -51,26 +52,6 @@ const PostCard = ({
 
   return(
     <article style={styles.post_container}>
-      {false && !!_embedded && !noImage && !!_embedded["wp:featuredmedia"] && !!_embedded["wp:featuredmedia"]["0"] && !!_embedded["wp:featuredmedia"]["0"].media_details && !!link &&
-        <figure>
-          <a href={urlCleaner(link)}>
-            {!!client ?
-              <>
-                <img
-                  src={PLACEHOLDER_IMAGE}
-                  data-src={getBestImage(_embedded["wp:featuredmedia"]["0"].media_details.sizes)} 
-                  alt={_embedded["wp:featuredmedia"]["0"].title.rendered} 
-                />
-                <figcaption style={{display: 'none'}}>
-                  {tagCleaner(_embedded["wp:featuredmedia"]["0"].title.rendered)}
-                </figcaption>
-              </>
-              :
-              <SkeletonImage/>
-            }
-          </a>
-        </figure>
-      }
       <div style={{...styles.content_container, ...margin ? styles.margin_bottom : {}}}>
         {!!link && !!title && !!excerpt && !!date_gmt && 
           <React.Fragment>
@@ -78,7 +59,7 @@ const PostCard = ({
               <h2 style={styles.title_smaller}>
                 {tagCleaner(title.rendered)}
               </h2>
-              
+              <div>{tagCleaner(excerpt.rendered, 'excerpt')}</div>
             </a>
             
           </React.Fragment>

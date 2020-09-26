@@ -8,7 +8,7 @@ import { TEXT_SPACING, SPACING, BORDER_STYLE, COLORS, PLACEHOLDER_IMAGE } from '
 const styles = {
   post_container:{
     background: 'white',
-		padding: `${TEXT_SPACING}px ${TEXT_SPACING}px 0`,
+		padding: `${TEXT_SPACING}px ${TEXT_SPACING}px 0`
   },
   image_container:{
     display: 'flex',
@@ -49,14 +49,14 @@ const PostCard = ({
 
   return(
     <article style={styles.post_container}>
-      <div style={{ ...margin ? styles.margin_bottom : {}}}>
+      <div style={{ ...margin ? styles.margin_bottom : {}, width: '100%'}}>
         {!!link && !!title && !!excerpt && !!date_gmt && 
           <React.Fragment>
             <a href={urlCleaner(link)}>
               <h2 style={styles.title_smaller}>
                 {tagCleaner(title.rendered)}
               </h2>
-              <div>{tagCleaner(excerpt.rendered)}</div>
+              <div>{tagCleaner(excerpt.rendered, 'excerpt')}</div>
             </a>
           </React.Fragment>
         }

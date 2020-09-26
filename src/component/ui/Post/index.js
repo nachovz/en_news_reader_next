@@ -11,7 +11,7 @@ const styles = {
   article:{
       minHeight:'100vh',
       borderBottom:`${TEXT_SPACING}px solid ${COLORS.primary}`,
-      paddingBottom:  TEXT_SPACING*4
+      paddingBottom:  TEXT_SPACING*2
   },
   paddedContent:{
     color: COLORS.text,
@@ -139,6 +139,7 @@ const Post = ({
       }
       <main >
         {!!content && tagCleaner(content.rendered, 'content', lazyLoaded) }
+				
       </main>
     </article>
   );

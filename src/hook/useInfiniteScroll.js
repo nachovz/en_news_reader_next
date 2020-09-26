@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
+import debounce from 'utils/debounce'
 
 const useInfiniteScroll = (callback) => {
   const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
-    window.addEventListener('scroll', debounce(handleScroll, 500));
-    return () => window.removeEventListener('scroll', debounce(handleScroll, 500));
+    window.addEventListener('scroll', debounce(handleScroll, 300));
+    return () => window.removeEventListener('scroll', debounce(handleScroll, 300));
   }, []);
 
   useEffect(() => {
@@ -16,18 +17,8 @@ const useInfiniteScroll = (callback) => {
   }, [isFetching]);
 
   function handleScroll() {
-    if (window.innerHeight + (Math.max( window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop)) < (document.documentElement.scrollHeight-50) || isFetching) return;
+    if (window.innerHeight + (Math.max( window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop)) < (document.documentElement.scrollHeight-800) || isFetching) return;
     setIsFetching(true);
-  }
-
-  const debounce = (func, delay) => {
-    let inDebounce;
-    return function() {
-      clearTimeout(inDebounce);
-      inDebounce = setTimeout(() => {
-        func.apply(this, arguments);
-      }, delay);
-    }
   }
 
   return [isFetching, setIsFetching];

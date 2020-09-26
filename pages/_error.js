@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import dynamic from "next/dynamic";
 import client from 'utils/client';
-//import Home from 'component/view/Home';
 import { COLORS, TEXT_SPACING } from 'styles/constants';
 import parseFilter from 'utils/parseFilter'; 
 import { routes } from 'data/constants';

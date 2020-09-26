@@ -2,8 +2,8 @@ import ReactHtmlParser from 'react-html-parser';
 import AdUnit from 'component/ui/AdUnit';
 
 const tagCleaner = (ren, type='title', lazyLoaded=false) => {
-  const parsed = ReactHtmlParser(
-    ren.replace(/style="text-align: justify;"/g, '')
+
+	var clean = ren.replace(/style="text-align: justify;"/g, '')
       .replace(/&#171;/g, '“<em>')
       .replace(/&#187;/g,'</em>”')
       .replace(/<p><iframe/g,'<iframe')
@@ -19,9 +19,12 @@ const tagCleaner = (ren, type='title', lazyLoaded=false) => {
       .replace(/<a href="https:\/\/www.elnacional.com/g, '<a href="')
       .replace(/style="color: rgb(0, 204, 255);"/g, '')
       .replace(/style="color:#00ccff"/g, '')
-  );
+
+	if( type === 'excerpt') clean = clean.substring(0, clean.indexOf(". ") > 50 ? clean.indexOf(". ") : clean.indexOf(". ", clean.indexOf(". "))) + "&hellip;"
+
+  const parsed = ReactHtmlParser(clean);
   
-  if(type==='title') return parsed;
+  if(type==='title' || type === 'excerpt') return parsed;
 
   let withAds = [];
   let paragraphs = 1;

@@ -103,6 +103,7 @@ figure{
   background: rgb(255, 255, 255);
   overflow: hidden;
   min-height: 214px;
+	text-align: center;
 }
 figure img{
   max-width:100%;

@@ -1,8 +1,6 @@
 import React from 'react';
 import dynamic from "next/dynamic";
-//import Error from '../_error';
 import client from 'utils/client';
-//import Home from 'component/view/Home';
 import { routes } from 'data/constants';
 import parseFilter from 'utils/parseFilter'
 

@@ -66,7 +66,7 @@ const Home = ({
   const horizontalNav = useRef(null);
   const { yoast_title, yoast_meta, yoast_json_ld } = yoast || { yoast_title:'', yoast_meta:[], yoast_json_ld:{} };
   const parsed_yoast_meta = yoastProcess(yoast_meta);
-  //console.log(state);
+  //console.log(posts);
 
   useEffect(() => {
     lazyLoadImages();
@@ -134,18 +134,20 @@ const Home = ({
         </div>
       }
       <div style={{...(!noMenu ? styles.article_wrapper:{})}}>
-        {state.posts.length > 0 ? [0, 1, 2].map((ind) => {
-					//const itr = ind > 2 ? ind - 3: ind;
-					//console.log(state.posts[4*ind], (state.posts[(4*ind)+1]), state.posts[(4*ind)+2], state.posts[(4*ind)+3]);
-          return(
+        {state.posts.length > 0 ? state.posts.map((post,ind) => {
+					return(
             <React.Fragment key={ind}>
-							<PostCard noImage={ind > 1} {...state.posts[4*ind]} />
-							<PostGrid {...state.posts[(4*ind)+1]}/>
-							<PostGrid {...state.posts[(4*ind)+2]}/>
-							<AdUnit 
-								type={ind % 6 === 0 ? AD_BANNER : AD_BOX }
-								unitId={`gtp-en-${ind}`}
-							/>
+							{ind % 3 === 0 
+								? 
+								(<>
+									{ind > 0 && <AdUnit type={ind % 6 === 0 ? AD_BANNER : AD_BOX } unitId={`gtp-en-${ind}`}/>}
+									<PostCard {...post} />
+									{ind === 0 && <AdUnit type={AD_BANNER} unitId={`gtp-en-${ind}`}/>}
+								</>)
+								:
+								<PostGrid {...post}/>
+							}
+							
             </React.Fragment>
           )
         })

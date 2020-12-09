@@ -69,7 +69,7 @@ module.exports = withPWA({
 					cacheName: 'static-js-assets',
 					expiration: {
 						maxEntries: 32,
-						maxAgeSeconds: 24 * 60 * 60 // 24 hours
+						maxAgeSeconds: 5 * 60 //5m //24 * 60 * 60 // 24 hours
 					}
 				}
 			},

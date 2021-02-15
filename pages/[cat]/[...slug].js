@@ -47,6 +47,7 @@ const PostView = ({ post, cat }) => {
       }
     });
   }
+	//console.log(post)
   return (
     <React.Fragment>
       {posts.map((post, ind)=> <Post key={ind} {...post} cat={cat}/>)}

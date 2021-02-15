@@ -10,7 +10,7 @@ const getBestImage = (media_details) => {
     }
   });
   
-  return images.sort((a, b) => b.width - a.width)[0].source_url || "";
+  return (images.sort((a, b) => b.width - a.width)[0] && images.sort((a, b) => b.width - a.width)[0].source_url) || "";
 }
 
 export default getBestImage;

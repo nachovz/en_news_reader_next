@@ -67,9 +67,11 @@ const Post = ({
   yoast_meta = yoastProcess(yoast_meta);
   const { ye, mo, da } = getDates(date_gmt);
   if(!_embedded) return null;
+	
 
   return (
     <article style={styles.article}>
+		{yoast_meta &&
       <NextSeo
         title={yoast_title || ''}
         description={yoast_meta.description || ''}
@@ -106,6 +108,7 @@ const Post = ({
           image: yoast_meta['twitter:image']
         }}
       />
+			}
       <Head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{
             __html: JSON.stringify(yoast_json_ld)}}>

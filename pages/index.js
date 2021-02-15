@@ -9,7 +9,7 @@ const Error = dynamic(import('./_error'));
 
 const HomePage = (props) => {
   if (!props.posts) return <Error status={404} />;
-    
+  //console.log(props)
   return (<Home {...props}/>)
 };
 

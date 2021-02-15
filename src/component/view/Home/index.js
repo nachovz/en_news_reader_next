@@ -63,10 +63,10 @@ const Home = ({
   });
   const [ isFetching, setIsFetching ] = useInfiniteScroll(fetchMorePosts); 
   const [ viewState, setViewState ] = useState(routes[cat] && routes[cat].value);
+	//console.log(yoast);
   const horizontalNav = useRef(null);
   const { yoast_title, yoast_meta, yoast_json_ld } = yoast || { yoast_title:'', yoast_meta:[], yoast_json_ld:{} };
   const parsed_yoast_meta = yoastProcess(yoast_meta);
-  //console.log(posts);
 
   useEffect(() => {
     lazyLoadImages();
@@ -95,6 +95,7 @@ const Home = ({
   const { tag, value } = (cat === 'home' || !routes[cat]) ? { tag: '', value: '' }:routes[cat];
   return (
     <div>
+		{parsed_yoast_meta &&
       <NextSeo
         title={(!!tag ? `${tag} - `:'')+(yoast_title || "El Nacional")}
         description={parsed_yoast_meta.description || ''}
@@ -114,6 +115,7 @@ const Home = ({
           title: parsed_yoast_meta['twitter:title']
         }}
       />
+		}
       <Head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{
             __html: JSON.stringify(yoast_json_ld)}}>

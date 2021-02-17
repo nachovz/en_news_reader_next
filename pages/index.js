@@ -13,7 +13,8 @@ const HomePage = (props) => {
   return (<Home {...props}/>)
 };
 
-export async function getServerSideProps(){
+//export async function getServerSideProps(){
+export async function getStaticProps(){
   const posts = await client.posts().get({
     per_page: 11,
     ...parseFilter([routes['home'].value]),

@@ -30,7 +30,7 @@ export async function getStaticProps(){
   const yoastFetch = await fetch('https://www.elnacional.com/wp-json/wp-rest-yoast-meta/v1/home');
   const yoast = await yoastFetch.json();
 
-  return { props: { posts:[...portada,...posts], yoast }};
+  return { props: { posts:[...portada,...posts], yoast }, revalidate: 1 };
 };
 
 export default HomePage;

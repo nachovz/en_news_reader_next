@@ -1,5 +1,6 @@
 import React from 'react';
 import dynamic from "next/dynamic";
+import { routes } from 'data/constants';
 import { fetchPostsByFilter } from 'utils/fetchs'
 
 const Home = dynamic(import('component/view/Home'));

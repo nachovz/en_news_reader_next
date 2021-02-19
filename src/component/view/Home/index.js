@@ -56,6 +56,14 @@ const Home = ({
   const { yoast_title, yoast_meta, yoast_json_ld } = yoast || { yoast_title:'', yoast_meta:[], yoast_json_ld:{} };
   const parsed_yoast_meta = yoastProcess(yoast_meta);
 
+	useEffect(() => {
+		fetchPostsByFilter(0, [viewState]).then((posts) => {
+			setState( prevState => ({ ...prevState, page: state.page+10, posts: [...posts]}));
+      setIsFetching(false);
+      lazyLoadImages();
+    });
+	}, [viewState])
+
   useEffect(() => {
     lazyLoadImages();
     typeof window !== 'undefined' && window.scrollTo(0, 0);

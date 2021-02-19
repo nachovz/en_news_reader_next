@@ -6,7 +6,7 @@ const Home = dynamic(import('component/view/Home'));
 const Error = dynamic(import('./_error'));
 
 const HomePage = (props) => {
-  if (!props.posts) return <Error status={404} />;
+  //if (!props.posts) return <Error status={404} />;
   //console.log(props)
 	/*const posts = client.posts().get({
     per_page: 11,
@@ -20,7 +20,7 @@ const HomePage = (props) => {
   return (<Home {...props}/>)
 };
 
-export async function getServerSideProps(){
+/*export async function getServerSideProps(){
 //export async function getStaticProps(){
   /*const posts = await client.posts().get({
     per_page: 11,
@@ -36,10 +36,10 @@ export async function getServerSideProps(){
   });*/
   //const yoastFetch = await fetch('https://www.elnacional.com/wp-json/wp-rest-yoast-meta/v1/home');
   //const yoast = await yoastFetch.json();
-	const yoast = {}
+	/*const yoast = {}
 	const posts = await fetchHome()
 
   return { props: { posts, yoast } };
-};
+};*/
 
 export default HomePage;

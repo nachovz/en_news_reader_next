@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Head from 'next/head';
 import dynamic from "next/dynamic";
-import client from 'utils/client';
 import { NextSeo } from 'next-seo';
 import useInfiniteScroll from 'hook/useInfiniteScroll';
 import PostCard from 'component/ui/PostCard';
 import PostGrid from 'component/ui/PostGrid';
 import AdUnit from 'component/ui/AdUnit';
 import lazyLoadImages from 'utils/images/lazyLoadImages';
-import parseFilter from 'utils/parseFilter';
+import { fetchPostsByFilter } from 'utils/fetchs'
 import { BORDER_STYLE, COLORS } from 'styles/constants';
 import { AD_BOX, AD_BANNER, menuElements, routes } from 'data/constants';
 import yoastProcess from 'utils/yoastProcess';
@@ -39,17 +38,6 @@ const styles = {
   }
 };
 
-const fetchPosts = async (page=0, filter=[]) => {
-  const posts = await client.posts().get({
-    per_page: 10,
-    offset: page,
-    ...parseFilter(filter),
-    _fields: 'title,excerpt,link,date_gmt,featured_media,_links,slug',
-    _embed: 1,
-  });
-  return posts;
-};
-
 const Home = ({ 
   posts=[], 
   cat='home', 
@@ -74,8 +62,9 @@ const Home = ({
   }, []);
 
   function fetchMorePosts () {
-    fetchPosts(state.page+10, [viewState]).then((posts) => {
-      setState( prevState => ({ ...prevState, page: state.page+10, posts: [...prevState.posts,...posts]}));
+    //fetchPosts(state.page+10, [viewState]).then((posts) => {
+    fetchPostsByFilter(state.page+10, [viewState]).then((posts) => {
+			setState( prevState => ({ ...prevState, page: state.page+10, posts: [...prevState.posts,...posts]}));
       setIsFetching(false);
       lazyLoadImages();
     });
@@ -86,7 +75,8 @@ const Home = ({
     window.history.replaceState({}, '', elem.slug);
     typeof window !== 'undefined' && window.scrollTo(0, 0);
     setState({ page: 0, posts: []});
-    fetchPosts(0, [elem.value]).then((posts) => {
+    //fetchPosts(0, [elem.value]).then((posts) => {
+		fetchPostsByFilter(0, [elem.value]).then((posts) => {
       setState({ page: 0, filter: [elem.value], posts: [...posts] });
       lazyLoadImages();
       horizontalNav.current.scrollLeft = 0;

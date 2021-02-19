@@ -1,28 +1,24 @@
 import React from 'react';
 import dynamic from "next/dynamic";
-import client from 'utils/client';
-import { routes } from 'data/constants';
-import parseFilter from 'utils/parseFilter'
+import { fetchPostsByFilter } from 'utils/fetchs'
 
 const Home = dynamic(import('component/view/Home'));
 const Error = dynamic(import('../_error'));
 
-const HomePage = (props) => {
+const CategoryPage = (props) => {
   if (!props.posts) return <Error statusCode={404} />;
     
   return (<Home {...props}/>)
 };
 
 export async function getServerSideProps( { query: { cat } } ) {
-  const posts = !routes[cat] ? null : await client.posts().get({
-    per_page: 12,
-    ...parseFilter([routes[cat].value]),
-    _fields: 'title,excerpt,link,date_gmt,featured_media,_links,slug',
-    _embed: 1,
-  });
+  const posts = !routes[cat] ? 
+		null 
+		: 
+		await fetchPostsByFilter(0, [routes[cat].value], 12)
   const yoastFetch = await fetch('https://www.elnacional.com/wp-json/wp-rest-yoast-meta/v1/home');
   const yoast = await yoastFetch.json();
   return { props: { posts, cat, yoast }};
 };
 
-export default HomePage;
+export default CategoryPage;

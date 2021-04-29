@@ -1,4 +1,5 @@
 export const HEADER_HEIGHT = 36;
+export const HEADER_WIDTH = 105;
 export const HEADER_CALC = 53;
 export const SPACING = 8;
 export const TEXT_SPACING = 20;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SlidingMenu from 'component/ui/SlidingMenu';
 import HamburgerMenu from 'react-hamburger-menu';
-import { HEADER_HEIGHT, SPACING, BORDER_STYLE } from 'styles/constants';
+import { HEADER_HEIGHT, HEADER_WIDTH, SPACING, BORDER_STYLE } from 'styles/constants';
 
 const styles = {
   header:{
@@ -43,7 +43,7 @@ const Header = () => {
         </div>
         <div style={styles.header_logo}>
           <a href="/">
-            <img src="/logo_en.png" srcSet="/logo_en@2x.png" height={HEADER_HEIGHT} alt="Logo El Nacional Venezuela"/>
+            <img src="/logo_en.png" srcSet="/logo_en@2x.png" height={HEADER_HEIGHT} width={HEADER_WIDTH} alt="Logo El Nacional Venezuela"/>
           </a>
         </div>
         <div style={styles.header_extras}></div>

@@ -68,6 +68,7 @@ const Post = ({
   const { ye, mo, da } = getDates(date_gmt);
   if(!_embedded) return null;
 	
+	const withFeatured = !!_embedded && _embedded["wp:featuredmedia"] && _embedded["wp:featuredmedia"]["0"] && _embedded["wp:featuredmedia"]["0"].title;
 
   return (
     <article style={styles.article}>
@@ -113,6 +114,9 @@ const Post = ({
         <script type="application/ld+json" dangerouslySetInnerHTML={{
             __html: JSON.stringify(yoast_json_ld)}}>
         </script>
+				{withFeatured && 
+					<link rel="preload" as="image" href={getBestImage(_embedded["wp:featuredmedia"]["0"].media_details.sizes)}></link>
+				}
       </Head>
       <header style={styles.paddedContent}>
         <h1 style={{fontSize: '1.7em'}}>{!!title && tagCleaner(title.rendered) }</h1>
@@ -127,15 +131,18 @@ const Post = ({
           <span>{`${da} de ${mo.charAt(0).toUpperCase() + mo.slice(1)} ${ye}`}</span>
         </>
       </div>
-      {!!_embedded && _embedded["wp:featuredmedia"] && _embedded["wp:featuredmedia"]["0"] && _embedded["wp:featuredmedia"]["0"].title &&
+      {withFeatured &&
         <figure style={styles.figure}> 
             {!!client &&
               <img 
                 src={PLACEHOLDER_IMAGE}
                 data-src={getBestImage(_embedded["wp:featuredmedia"]["0"].media_details.sizes)} 
-                alt={_embedded["wp:featuredmedia"]["0"].title.rendered} />
+                alt={_embedded["wp:featuredmedia"]["0"].title.rendered}
+								width="100%"
+								style={{ minHeight: 210 }}
+							/>
             }
-            <figcaption>
+            <figcaption style={{ height: 15, width: "100%" }}>
               {tagCleaner(_embedded["wp:featuredmedia"]["0"].title.rendered)}
             </figcaption>
         </figure>
